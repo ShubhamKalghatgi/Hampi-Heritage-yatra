@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hampi Heritage Yatra</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; padding: 0; background: #f4f4f4; }
+        header { background: #8e44ad; color: white; padding: 1rem; text-align: center; }
+        nav { background: #2c3e50; color: white; padding: 10px; text-align: center; }
+        .container { padding: 20px; max-width: 1000px; margin: auto; background: white; }
+        .form-section { background: #ecf0f1; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .itinerary-box { border-left: 5px solid #8e44ad; padding: 10px; margin: 10px 0; background: #fff; }
+        input, select, button { padding: 10px; margin: 5px; width: 200px; }
+        button { background: #8e44ad; color: white; border: none; cursor: pointer; }
+        footer { text-align: center; padding: 20px; background: #2c3e50; color: white; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Hampi Heritage Yatra</h1>
+    <p>Explore the ruins of the Vijayanagara Empire</p>
+</header>
+
+<nav>
+    <a href="#about" style="color:white; margin:10px;">About</a>
+    <a href="#itinerary" style="color:white; margin:10px;">Standard Itinerary</a>
+    <a href="#planner" style="color:white; margin:10px;">Custom Planner</a>
+</nav>
+
+<div class="container">
+    <section id="itinerary">
+        <h2>Standard 3-Day Itinerary</h2>
+        <div class="itinerary-box"><strong>Day 1:</strong> Virupapur Gaddi, Anegundi Village, and Monkey Temple.</div>
+        <div class="itinerary-box"><strong>Day 2:</strong> Vittala Temple (Stone Chariot), King’s Balance, and Coracle Ride.</div>
+        <div class="itinerary-box"><strong>Day 3:</strong> Virupaksha Temple, Hemakuta Hill, and Hampi Bazaar.</div>
+    </section>
+
+    <section id="planner" class="form-section">
+        <h2>Plan Your Custom Yatra</h2>
+        <input type="text" id="location" placeholder="Starting City (e.g., Delhi)">
+        <input type="date" id="date">
+        <select id="days">
+            <option value="1">1 Day</option>
+            <option value="2">2 Days</option>
+            <option value="3">3 Days</option>
+            <option value="4">4+ Days</option>
+        </select>
+        <button onclick="generatePlan()">Generate Itinerary</button>
+
+        <div id="result" style="margin-top:20px;"></div>
+    </section>
+</div>
+
+<script>
+    function generatePlan() {
+        const city = document.getElementById('location').value;
+        const days = document.getElementById('days').value;
+        const resultDiv = document.getElementById('result');
+
+        if(!city) { alert("Please enter your start location"); return; }
+
+        let plan = `<h3>Your Plan from ${city}</h3>`;
+        
+        if (days == "1") {
+            plan += "<p><strong>Focus:</strong> Main Temple Complex (Virupaksha & Vittala Temple).</p>";
+        } else if (days == "2") {
+            plan += "<p><strong>Focus:</strong> Day 1: Main Temples; Day 2: Royal Enclosure & Lotus Mahal.</p>";
+        } else {
+            plan += "<p><strong>Focus:</strong> Full Heritage Circuit including Anegundi and Sanapur Lake.</p>";
+        }
+        
+        plan += `<p>Travel Tip: From ${city}, check for trains to Hospet Junction (nearest station).</p>`;
+        resultDiv.innerHTML = plan;
+    }
+</script>
+
+<footer>
+    <p>&copy; 2024 Hampi Heritage Yatra</p>
+</footer>
+
+</body>
+</html>
