@@ -13,6 +13,7 @@
             --text: #2c2c2c;
             --white: #ffffff;
             --stone: #a0937d;
+            --success: #2e7d32;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
@@ -23,6 +24,7 @@
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
+            user-select: none; /* Prevent text selection during game dragging */
         }
 
         /* Navigation */
@@ -51,7 +53,7 @@
         /* Header */
         header {
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('hampi-main.jpg') center/cover;
-            height: 70vh;
+            height: 60vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -138,7 +140,7 @@
         }
 
         .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--primary); }
-        .form-group select, .form-group input {
+        .form-group select {
             width: 100%;
             padding: 12px;
             border: 1px solid #ddd;
@@ -170,65 +172,103 @@
             display: none;
         }
 
-        /* Grid & Cards */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        /* Word Search Game Styles */
+        .game-section {
+            background: #fff;
+            padding: 80px 20px;
+            text-align: center;
+        }
 
+        .game-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 40px);
+            grid-template-rows: repeat(12, 40px);
+            gap: 5px;
+            background: #f0ede6;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            touch-action: none;
+        }
+
+        .grid-cell {
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid #eee;
+        }
+
+        .grid-cell.selecting { background: var(--accent); color: #fff; transform: scale(1.1); }
+        .grid-cell.found { background: var(--success); color: #fff; }
+
+        .clue-box {
+            max-width: 400px;
+            text-align: left;
+        }
+
+        .clue-box h3 { font-family: 'Cinzel', serif; color: var(--primary); margin-bottom: 20px; }
+        .clue-list-item {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+            transition: 0.3s;
+        }
+
+        .clue-list-item.solved {
+            text-decoration: line-through;
+            opacity: 0.5;
+            border-left-color: var(--success);
+            background: #e8f5e9;
+        }
+
+        /* Itinerary Grid */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 40px;
             margin-bottom: 80px;
         }
-
         .card {
             background: white;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-            transition: all 0.4s ease;
-            display: flex;
-            flex-direction: column;
+            transition: 0.3s;
         }
+        .card img { width: 100%; height: 250px; object-fit: cover; }
+        .card-content { padding: 30px; }
 
-        .card:hover { transform: translateY(-15px); box-shadow: 0 20px 45px rgba(0,0,0,0.15); }
-
-        .card-img-wrapper { position: relative; height: 250px; overflow: hidden; }
-        .card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s;
-        }
-        .card:hover img { transform: scale(1.1); }
-
-        .card-content { padding: 30px; flex-grow: 1; }
-        .card-content h3 {
-            font-family: 'Cinzel', serif;
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-            border-bottom: 2px solid var(--bg);
-            padding-bottom: 10px;
-        }
-
-        .card-content p { font-size: 0.95rem; color: #444; margin-bottom: 20px; text-align: justify; }
-
-        /* Footer */
         footer {
             background: #1a1a1a;
             color: #888;
-            padding: 60px 20px;
+            padding: 40px;
             text-align: center;
         }
 
-        footer h2 { font-family: 'Cinzel', serif; color: var(--accent); margin-bottom: 20px; }
-        .footer-links { margin-bottom: 30px; }
-        .footer-links a { color: #ccc; text-decoration: none; margin: 0 10px; }
-
         @media (max-width: 768px) {
-            .planner-form { grid-template-columns: 1fr; }
-            .plan-btn { grid-column: span 1; }
-            header h1 { font-size: 2.8rem; }
+            .word-grid { grid-template-columns: repeat(12, 28px); grid-template-rows: repeat(12, 28px); gap: 2px; }
+            .grid-cell { width: 28px; height: 28px; font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -236,53 +276,32 @@
 
 <nav>
     <a href="#">Home</a>
-    <a href="#chronology">Timeline</a>
     <a href="#yatra">Yatra Planner</a>
-    <a href="#temples">Temples</a>
-    <a href="#complexes">Complexes</a>
+    <a href="#temples">Heritage Sites</a>
+    <a href="#game">Discovery Game</a>
 </nav>
 
 <header>
     <h1>Hampi Heritage Yatra</h1>
-    <p>Journey through the ruins where history whispers in every stone</p>
+    <p>Step into the ruins of the 14th-century Vijayanagara Empire</p>
 </header>
 
-<!-- Section 1: Chronology -->
+<!-- Chronology -->
 <div id="chronology" class="chronology-wrapper">
     <div class="container">
-        <h2 class="section-title" style="color: var(--accent);">Chronology of Hampi</h2>
+        <h2 class="section-title" style="color: var(--accent);">Historical Timeline</h2>
         <div class="timeline-container">
-            <div class="timeline-item">
-                <h4>3rd Century BC</h4>
-                <p>Hampi was part of the Ashokan Empire, known for its strategic location near the river.</p>
-            </div>
-            <div class="timeline-item">
-                <h4>1336 AD</h4>
-                <p>Foundation of the Vijayanagara Empire by Harihara I and Bukka Raya I on the south bank of Tungabhadra.</p>
-            </div>
-            <div class="timeline-item">
-                <h4>1509 - 1529 AD</h4>
-                <p>The Golden Era under Krishnadevaraya. Most grand structures and international trade boomed during this time.</p>
-            </div>
-            <div class="timeline-item">
-                <h4>1565 AD</h4>
-                <p>Battle of Talikota. The empire was defeated by the Deccan Sultanates, leading to the destruction of the city.</p>
-            </div>
-            <div class="timeline-item">
-                <h4>1800 AD</h4>
-                <p>Colin Mackenzie, the first Surveyor General of India, "discovers" and starts documenting the ruins.</p>
-            </div>
-            <div class="timeline-item">
-                <h4>1986 AD</h4>
-                <p>UNESCO declares Hampi as a World Heritage Site, recognizing its architectural and historical significance.</p>
-            </div>
+            <div class="timeline-item"><h4>1336 AD</h4><p>Empire founded by Sangama brothers.</p></div>
+            <div class="timeline-item"><h4>1509 AD</h4><p>Krishnadevaraya takes the throne.</p></div>
+            <div class="timeline-item"><h4>1565 AD</h4><p>The tragic fall at Battle of Talikota.</p></div>
+            <div class="timeline-item"><h4>1986 AD</h4><p>UNESCO World Heritage status granted.</p></div>
         </div>
     </div>
 </div>
 
-<!-- Section 2: Yatra Planner -->
+<!-- Tour Planner -->
 <div id="yatra" class="container">
-    <h2 class="section-title">Plan Your Yatra</h2>
+    <h2 class="section-title">Yatra Tour Planner</h2>
     <div class="planner-container">
         <div class="planner-form">
             <div class="form-group">
@@ -295,195 +314,222 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Duration (Days)</label>
+                <label>Duration of Stay</label>
                 <select id="duration">
                     <option value="1">1 Day Express</option>
                     <option value="2">2 Days Classic</option>
                     <option value="3">3 Days Extensive</option>
+                    <option value="5">5 Days Maharaja Explorer</option>
                 </select>
             </div>
-            <button class="plan-btn" onclick="generateItinerary()">Generate My Itinerary</button>
+            <button class="plan-btn" onclick="generateItinerary()">Generate Itinerary</button>
         </div>
         <div id="itinerary-result">
-            <h3 style="color:var(--primary); margin-bottom:10px;">Your Custom Plan:</h3>
+            <h3 style="color:var(--primary); margin-bottom:10px;">Your Custom Path:</h3>
             <p id="plan-text"></p>
         </div>
     </div>
 </div>
 
-<!-- Section 3: Temples & Places -->
+<!-- Places -->
 <div class="container" id="temples">
-    <h2 class="section-title">The Sacred Temples</h2>
+    <h2 class="section-title">Must-Visit Sites</h2>
     <div class="grid">
-        <!-- Virupaksha -->
         <div class="card">
-            <div class="card-img-wrapper">
-                <img src="virupaksha.jpg" alt="Virupaksha Temple">
-            </div>
-            <div class="card-content">
-                <h3>Virupaksha Temple</h3>
-                <p>Dedicated to Lord Virupaksha, a form of Shiva, this temple predates the empire itself. Its 160-foot gopuram dominates the skyline. Visitors can see the inverted shadow of the gopuram through a small hole in the wall, a marvel of ancient engineering.</p>
-            </div>
+            <img src="vittala.jpg" alt="Vittala Temple">
+            <div class="card-content"><h3>Vittala Temple</h3><p>Known for its stone chariot and musical pillars.</p></div>
         </div>
-
-        <!-- Vittala -->
         <div class="card">
-            <div class="card-img-wrapper">
-                <img src="vittala.jpg" alt="Vittala Temple">
-            </div>
-            <div class="card-content">
-                <h3>Vittala Temple</h3>
-                <p>The crown jewel of Hampi. It houses the iconic Stone Chariot, which is actually a shrine. The Ranga Mantapa is famous for its 56 musical pillars that produce melodic notes when tapped gently. This complex represents the zenith of Dravidian architecture.</p>
-            </div>
+            <img src="virupaksha.jpg" alt="Virupaksha Temple">
+            <div class="card-content"><h3>Virupaksha Temple</h3><p>The living temple of Hampi, dedicated to Lord Shiva.</p></div>
         </div>
-
-        <!-- Krishna -->
         <div class="card">
-            <div class="card-img-wrapper">
-                <img src="Krishna Temple.jpg" alt="Krishna Temple">
-            </div>
-            <div class="card-content">
-                <h3>Krishna Temple</h3>
-                <p>Built by King Krishnadevaraya in 1513 to celebrate the conquest of Udayagiri. The temple is unique for its carvings of sub-deities and the Balakrishna image that was once housed here (now in a Chennai museum).</p>
-            </div>
-        </div>
-
-        <!-- Hazara Rama -->
-        <div class="card">
-            <div class="card-img-wrapper">
-                <img src="Hazara Rama Temple.jfif" alt="Hazara Rama Temple">
-            </div>
-            <div class="card-content">
-                <h3>Hazara Rama Temple</h3>
-                <p>Considered the private chapel of the Vijayanagara kings. The name "Hazara Rama" (Thousand Ramas) refers to the thousands of carvings on the walls depicting the story of the Ramayana in sequential panels.</p>
-            </div>
-        </div>
-
-        <!-- Badavi Linga -->
-        <div class="card">
-            <div class="card-img-wrapper">
-                <img src="Shree Badavilinga Gudi.jpg" alt="Badavi Linga">
-            </div>
-            <div class="card-content">
-                <h3>Badavi Linga</h3>
-                <p>Commissioned by a poor peasant woman, this 3-meter high monolithic Linga stands in a chamber that is permanently flooded by a canal. It symbolizes the omnipresence of Shiva in nature.</p>
-            </div>
-        </div>
-
-        <!-- Ganesha Pair -->
-        <div class="card">
-            <div class="card-img-wrapper">
-                <img src="Sasivekalu Ganesha.jpg" alt="Sasivekalu Ganesha">
-            </div>
-            <div class="card-content">
-                <h3>Sasivekalu & Kadalekalu</h3>
-                <p>Two distinct monolithic Ganesha statues. Sasivekalu (Mustard Seed) is carved from a single boulder, while Kadalekalu (Gram Seed) sits in a temple with tall pillars offering a panoramic view of Hampi Bazar.</p>
-            </div>
+            <img src="Lotus Mahal.jpg" alt="Lotus Mahal">
+            <div class="card-content"><h3>Lotus Mahal</h3><p>An architectural fusion of Islamic and Hindu styles.</p></div>
         </div>
     </div>
+</div>
 
-    <h2 class="section-title" id="complexes">The Royal Enclosure</h2>
-    <div class="grid">
-        <!-- Lotus Mahal -->
-        <div class="card">
-            <div class="card-img-wrapper">
-                <img src="Lotus Mahal.jpg" alt="Lotus Mahal">
+<!-- Word Search Game -->
+<div id="game" class="game-section">
+    <h2 class="section-title">Word Search Discovery</h2>
+    <p style="margin-bottom: 20px;">Try a game to test your knowledge about Hampi! Drag to circle the names.</p>
+    
+    <div class="game-container">
+        <div id="grid" class="word-grid"></div>
+        
+        <div class="clue-box">
+            <h3>Find these sites:</h3>
+            <div id="clue-list">
+                <!-- Clues populating here -->
             </div>
-            <div class="card-content">
-                <h3>Lotus Mahal</h3>
-                <p>A fine example of Indo-Islamic fusion architecture. It was used as a council chamber for royal women. The structure was ingeniously cooled by water pipes running through the walls, an early form of air conditioning.</p>
-            </div>
-        </div>
-
-        <!-- Elephant Stables -->
-        <div class="card">
-            <div class="card-img-wrapper">
-                <img src="Elephant Stables.jpg" alt="Elephant Stables">
-            </div>
-            <div class="card-content">
-                <h3>Elephant Stables</h3>
-                <p>Consisting of 11 domed chambers, these stables housed the royal elephants. The design reflects Persian influence and the wealth of the empire which could afford such grand quarters for animals.</p>
-            </div>
-        </div>
-
-        <!-- Queen's Bath -->
-        <div class="card">
-            <div class="card-img-wrapper">
-                <img src="Queen's Bath.jpg" alt="Queen's Bath">
-            </div>
-            <div class="card-content">
-                <h3>Queen's Bath</h3>
-                <p>A rectangular building with a plain exterior but a stunning interior. It features a sunken pool surrounded by corridors with ornate balconies and lotus-shaped fountains.</p>
-            </div>
-        </div>
-
-        <!-- Mahanavami Dibba -->
-        <div class="card">
-            <div class="card-img-wrapper">
-                <img src="Mahanavami Dibba.jpg" alt="Mahanavami Dibba">
-            </div>
-            <div class="card-content">
-                <h3>Mahanavami Dibba</h3>
-                <p>A massive three-layered platform decorated with intricate carvings of elephants, horses, and dancers. It was the stage from which the King watched the grand festivals of Navaratri.</p>
-            </div>
-        </div>
-
-        <!-- Stepped Tank -->
-        <div class="card">
-            <div class="card-img-wrapper">
-                <img src="stepped tank .jpg" alt="Stepped Tank">
-            </div>
-            <div class="card-content">
-                <h3>Stepped Tank (Pushkarani)</h3>
-                <p>Discovered during excavations in the 1980s, this tank is constructed of black schist. Each stone is marked with a number or character, suggesting it was "pre-fabricated" and assembled on-site.</p>
-            </div>
-        </div>
-
-        <!-- Underground Shiva -->
-        <div class="card">
-            <div class="card-img-wrapper">
-                <img src="Underground Shiva Temple.jfif" alt="Underground Shiva Temple">
-            </div>
-            <div class="card-content">
-                <h3>Underground Shiva Temple</h3>
-                <p>Built below ground level, the inner sanctum is usually submerged in water. It is one of the oldest temples in the complex and was likely used for private royal ceremonies.</p>
-            </div>
+            <button class="plan-btn" style="margin-top: 20px;" onclick="resetGame()">Reset Game</button>
         </div>
     </div>
 </div>
 
 <footer>
-    <h2>Hampi Heritage Yatra</h2>
-    <div class="footer-links">
-        <a href="#chronology">History</a> | 
-        <a href="#yatra">Travel Planner</a> | 
-        <a href="#temples">Sacred Sites</a> | 
-        <a href="#complexes">Royal Life</a>
-    </div>
-    <p>&copy; 2024 Hampi Heritage Yatra. All Rights Reserved. <br> Explore the footprints of a vanished empire.</p>
+    <p>&copy; 2024 Hampi Heritage Yatra | Preserving India's Golden Past</p>
 </footer>
 
 <script>
+    // ITINERARY LOGIC
     function generateItinerary() {
         const city = document.getElementById('start-city').value;
         const days = document.getElementById('duration').value;
         const resultDiv = document.getElementById('itinerary-result');
         const planText = document.getElementById('plan-text');
 
-        let itinerary = "";
+        let plan = "";
+        if(days == "1") plan = `<strong>Day 1:</strong> Arrive from ${city}. Fast-track tour of Virupaksha Temple, Hemakuta Hill, and the Vittala Stone Chariot.`;
+        else if(days == "2") plan = `<strong>Day 1:</strong> Arrival & Sacred Center. <br><strong>Day 2:</strong> Royal Enclosure & Lotus Mahal. Sunset at Malyavanta Hill.`;
+        else if(days == "3") plan = `<strong>Day 1:</strong> Temples. <br><strong>Day 2:</strong> Royal life & Museum. <br><strong>Day 3:</strong> Riverside walk and Coracle ride before departure.`;
+        else if(days == "5") plan = `<strong>Day 1:</strong> Welcome from ${city}. Sunset at Hemakuta.<br><strong>Day 2:</strong> Complete Sacred Center deep-dive.<br><strong>Day 3:</strong> Royal Enclosure, Hazara Rama, and Zenana Enclosure.<br><strong>Day 4:</strong> Cross to Anegundi (Ancient Kishkinda), Pampa Sarovar, and Hanuman Temple.<br><strong>Day 5:</strong> Early Matanga sunrise, shopping at Hampi Bazar, and departure.`;
 
-        if(days == "1") {
-            itinerary = `<strong>Day 1:</strong> Arrive from ${city}. Focus on the Virupaksha Temple, Hemakuta Hill (sunset), and the Vittala Temple Stone Chariot. Quick stop at the Royal Enclosure.`;
-        } else if(days == "2") {
-            itinerary = `<strong>Day 1:</strong> Reach from ${city}. Explore Virupaksha, Hampi Bazar, and Vitthala Complex. <br><strong>Day 2:</strong> Visit the Royal Enclosure, Lotus Mahal, Elephant Stables, and the Mahanavami Dibba. Catch the sunset at Matanga Hill.`;
-        } else {
-            itinerary = `<strong>Day 1:</strong> Welcome from ${city}. Riverside walk, Tungabhadra Coracle ride, and Virupaksha Temple. <br><strong>Day 2:</strong> Detailed tour of Vittala Temple, Achyutaraya Temple, and Krishna Temple. <br><strong>Day 3:</strong> Explore Anegundi (across the river), the Hanuman Temple, and the Underground Shiva Temple before departure.`;
-        }
-
-        planText.innerHTML = itinerary;
+        planText.innerHTML = plan;
         resultDiv.style.display = 'block';
-        resultDiv.scrollIntoView({behavior: 'smooth'});
     }
+
+    // WORD SEARCH GAME LOGIC
+    const words = ["VITTALA", "VIRUPAKSHA", "LOTUS", "HAMPI", "RAMA", "LINGA", "MAHAL"];
+    const gridSize = 12;
+    let grid = Array(gridSize).fill().map(() => Array(gridSize).fill(''));
+    let solvedWords = [];
+    let isDragging = false;
+    let startCell = null;
+    let selectedCells = [];
+
+    function initGame() {
+        grid = Array(gridSize).fill().map(() => Array(gridSize).fill(''));
+        solvedWords = [];
+        const gridElement = document.getElementById('grid');
+        gridElement.innerHTML = '';
+
+        // Place words
+        words.forEach(word => {
+            let placed = false;
+            while (!placed) {
+                const dir = Math.random() > 0.5 ? {r: 0, c: 1} : {r: 1, c: 0};
+                const row = Math.floor(Math.random() * (gridSize - (dir.r * word.length)));
+                const col = Math.floor(Math.random() * (gridSize - (dir.c * word.length)));
+                
+                let canPlace = true;
+                for(let i=0; i<word.length; i++) {
+                    if(grid[row + i*dir.r][col + i*dir.c] !== '' && grid[row + i*dir.r][col + i*dir.c] !== word[i]) {
+                        canPlace = false; break;
+                    }
+                }
+
+                if(canPlace) {
+                    for(let i=0; i<word.length; i++) grid[row + i*dir.r][col + i*dir.c] = word[i];
+                    placed = true;
+                }
+            }
+        });
+
+        // Fill empty
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        for(let r=0; r<gridSize; r++) {
+            for(let c=0; c<gridSize; c++) {
+                if(grid[r][c] === '') grid[r][c] = letters[Math.floor(Math.random() * letters.length)];
+                
+                const cell = document.createElement('div');
+                cell.className = 'grid-cell';
+                cell.innerText = grid[r][c];
+                cell.dataset.r = r;
+                cell.dataset.c = c;
+                
+                cell.addEventListener('mousedown', startSelection);
+                cell.addEventListener('mouseenter', continueSelection);
+                cell.addEventListener('mouseup', endSelection);
+                
+                // Touch support
+                cell.addEventListener('touchstart', (e) => { e.preventDefault(); startSelection(e); });
+                cell.addEventListener('touchmove', handleTouchMove);
+                cell.addEventListener('touchend', endSelection);
+
+                gridElement.appendChild(cell);
+            }
+        }
+        updateClueList();
+    }
+
+    function updateClueList() {
+        const list = document.getElementById('clue-list');
+        list.innerHTML = '';
+        words.forEach(w => {
+            const item = document.createElement('div');
+            item.className = 'clue-list-item' + (solvedWords.includes(w) ? ' solved' : '');
+            let hint = "";
+            if(w === "VITTALA") hint = "Temple with musical pillars";
+            if(w === "VIRUPAKSHA") hint = "Hampi's oldest active temple";
+            if(w === "LOTUS") hint = "A flower-shaped Mahal";
+            if(w === "HAMPI") hint = "The name of this heritage city";
+            if(w === "RAMA") hint = "The king's private Hazara ____ temple";
+            if(w === "LINGA") hint = "The massive monolithic stone in water";
+            if(w === "MAHAL") hint = "Term for a palace building";
+            item.innerText = `${w}: ${hint}`;
+            list.appendChild(item);
+        });
+    }
+
+    function startSelection(e) {
+        isDragging = true;
+        selectedCells = [];
+        const cell = e.target;
+        cell.classList.add('selecting');
+        selectedCells.push(cell);
+    }
+
+    function continueSelection(e) {
+        if (!isDragging) return;
+        const cell = e.target;
+        if (!selectedCells.includes(cell)) {
+            cell.classList.add('selecting');
+            selectedCells.push(cell);
+        }
+    }
+
+    function handleTouchMove(e) {
+        if (!isDragging) return;
+        const touch = e.touches[0];
+        const el = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (el && el.classList.contains('grid-cell') && !selectedCells.includes(el)) {
+            el.classList.add('selecting');
+            selectedCells.push(el);
+        }
+    }
+
+    function endSelection() {
+        if (!isDragging) return;
+        isDragging = false;
+        
+        const currentWord = selectedCells.map(c => c.innerText).join('');
+        const reversedWord = currentWord.split('').reverse().join('');
+        
+        if (words.includes(currentWord) || words.includes(reversedWord)) {
+            const foundWord = words.includes(currentWord) ? currentWord : reversedWord;
+            if (!solvedWords.includes(foundWord)) {
+                solvedWords.push(foundWord);
+                selectedCells.forEach(c => {
+                    c.classList.remove('selecting');
+                    c.classList.add('found');
+                });
+                updateClueList();
+            }
+        } else {
+            selectedCells.forEach(c => c.classList.remove('selecting'));
+        }
+        selectedCells = [];
+    }
+
+    function resetGame() {
+        initGame();
+    }
+
+    function focusCell(r, c) { /* Logic handled by dragging */ }
+
+    window.onload = initGame;
 </script>
 
 </body>
