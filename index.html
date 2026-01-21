@@ -121,16 +121,16 @@
         .game-box { background: #f9f4e8; padding: 30px; border-radius: 15px; margin-bottom: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .word-search-container { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
         .word-grid { display: grid; grid-template-columns: repeat(12, 30px); gap: 4px; }
-        .grid-cell { width: 30px; height: 30px; background: white; border: 1px solid #ddd; display: flex; justify-content: center; align-items: center; font-weight: bold; cursor: pointer; border-radius: 4px; font-size: 12px; }
+        .grid-cell { width: 30px; height: 30px; background: white; border: 1px solid #ddd; display: flex; justify-content: center; align-items: center; font-weight: bold; cursor: pointer; border-radius: 4px; font-size: 12px; user-select: none; }
         .grid-cell.found { background: var(--success); color: white; }
         .grid-cell.selecting { background: var(--accent); color: white; }
         .quiz-option { display: block; width: 100%; padding: 12px; margin: 8px 0; background: white; border: 1px solid #ddd; border-radius: 8px; text-align: left; cursor: pointer; transition: 0.2s; font-family: inherit; }
         .quiz-option:hover { border-color: var(--accent); background: #fffdf5; }
-        .quiz-option.correct { background: var(--success); color: white; }
-        .quiz-option.wrong { background: var(--error); color: white; }
+        .quiz-option.correct { background: var(--success) !important; color: white !important; }
+        .quiz-option.wrong { background: var(--error) !important; color: white !important; }
         .form-group { margin-bottom: 15px; text-align: left; }
         .form-group label { display: block; font-weight: 600; margin-bottom: 5px; color: var(--primary); }
-        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; background: white; }
         .btn { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; transition: 0.3s; }
         .btn:hover { background: #5d2e0d; }
 
@@ -176,7 +176,6 @@
 
 <div class="container" id="temples">
     <div class="grid">
-        <!-- Existing Cards Preserved -->
         <div class="card">
             <img src="virupaksha.jpg" alt="Virupaksha Temple" onerror="this.src='https://images.unsplash.com/photo-1590766948510-d008f3684a0c?auto=format&fit=crop&w=500'">
             <div class="card-content">
@@ -305,7 +304,6 @@
             </div>
         </div>
 
-        
         <div class="card" id="river">
             <img src="Tungabhadra River.jpg" alt="Tungabhadra River" onerror="this.src='https://images.unsplash.com/photo-1600100397608-f09075706497?auto=format&fit=crop&w=500'">
             <div class="card-content">
@@ -356,20 +354,37 @@
     </div>
 </div>
 
-<!-- ADDED: PLANNER SECTION -->
+<!-- PLANNER SECTION -->
 <section id="planner" class="container" style="margin-top: 80px;">
     <h2 class="section-title">5-Day Yatra Planner</h2>
     <div style="background:white; padding:40px; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.05); margin-bottom: 50px;">
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:20px; margin-bottom:20px;">
-            <div class="form-group"><label>Starting Point</label><input type="text" id="start-node" placeholder="e.g. Bengaluru"></div>
-            <div class="form-group"><label>Duration</label><select id="yatra-days"><option value="1">1 Day</option><option value="2">2 Days</option><option value="3">3 Days</option><option value="5" selected>5 Days</option></select></div>
+            <div class="form-group">
+                <label>Starting Point</label>
+                <select id="start-node">
+                    <option value="Bengaluru">Bengaluru</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Chennai">Chennai</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Duration</label>
+                <select id="yatra-days">
+                    <option value="1">1 Day (Express)</option>
+                    <option value="2">2 Days (Standard)</option>
+                    <option value="3">3 Days (Leisurely)</option>
+                    <option value="5" selected>5 Days (Heritage Master)</option>
+                </select>
+            </div>
         </div>
         <button class="btn" onclick="buildPlan()">Generate Expert Itinerary</button>
         <div id="plan-output" style="margin-top:20px; padding:20px; background:var(--bg); border-radius:10px; display:none; text-align: left;"></div>
     </div>
 </section>
 
-<!-- ADDED: GAMES SECTION -->
+<!-- GAMES SECTION -->
 <section id="games" class="game-area">
     <div class="container">
         <h2 class="section-title">Heritage Knowledge Games</h2>
@@ -379,12 +394,12 @@
             <div class="word-search-container">
                 <div id="ws-grid" class="word-grid"></div>
                 <div style="text-align: left; max-width: 300px;">
-                    <h4 style="margin-bottom: 10px;">Find these words:</h4>
-                    <div class="clue-item" id="clue-VITTALA" style="margin-bottom: 5px;">• VITTALA</div>
-                    <div class="clue-item" id="clue-HAMPI" style="margin-bottom: 5px;">• HAMPI</div>
-                    <div class="clue-item" id="clue-LOTUS" style="margin-bottom: 5px;">• LOTUS</div>
-                    <div class="clue-item" id="clue-RAMA" style="margin-bottom: 5px;">• RAMA</div>
-                    <div class="clue-item" id="clue-LINGA" style="margin-bottom: 5px;">• LINGA</div>
+                    <h4 style="margin-bottom: 10px;">Solve the Clues:</h4>
+                    <div class="clue-item" id="clue-VITTALA" style="margin-bottom: 8px; font-size: 0.9rem;">1. Home of the Stone Chariot & Musical Pillars.</div>
+                    <div class="clue-item" id="clue-HAMPI" style="margin-bottom: 8px; font-size: 0.9rem;">2. The village containing the UNESCO ruins.</div>
+                    <div class="clue-item" id="clue-LOTUS" style="margin-bottom: 8px; font-size: 0.9rem;">3. The Mahal shaped like a blossoming flower.</div>
+                    <div class="clue-item" id="clue-RAMA" style="margin-bottom: 8px; font-size: 0.9rem;">4. The Royal temple depicting the Ramayana.</div>
+                    <div class="clue-item" id="clue-LINGA" style="margin-bottom: 8px; font-size: 0.9rem;">5. Monolithic Shiva symbol in Badavi Temple.</div>
                 </div>
             </div>
             <button class="btn" style="width:auto; margin-top:20px; padding:8px 20px;" onclick="initWordSearch()">Reset Grid</button>
@@ -404,7 +419,7 @@
     </div>
 </section>
 
-<!-- ADDED: CONTACT SECTION -->
+<!-- CONTACT SECTION -->
 <section id="contact" class="container" style="padding: 80px 0; margin-top: 0;">
     <h2 class="section-title">Request Detailed Yatra Guide</h2>
     <div style="max-width:600px; margin:0 auto; background:white; padding:40px; border-radius:15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
@@ -416,7 +431,7 @@
     </div>
 </section>
 
-<!-- ADDED: CHATBOT WIDGET -->
+<!-- CHATBOT WIDGET -->
 <div id="chat-widget">
     <div id="chat-btn" onclick="toggleChat()">💬</div>
     <div id="chat-window">
@@ -431,7 +446,7 @@
     </div>
 </div>
 
-<!-- ADDED: EMAIL OVERLAY -->
+<!-- EMAIL OVERLAY -->
 <div id="email-overlay">
     <div class="email-card">
         <h2 style="color:var(--primary); border-bottom:2px solid var(--accent); padding-bottom:10px; font-family: 'Cinzel';">New Message: Your Yatra Guide</h2>
@@ -454,13 +469,14 @@
 </footer>
 
 <script>
-    const apiKey = ""; // Environment handles this
+    const apiKey = ""; 
 
     // 1. Planner Logic
     function buildPlan() {
         const days = document.getElementById('yatra-days').value;
+        const start = document.getElementById('start-node').value;
         const out = document.getElementById('plan-output');
-        let html = `<h4 style="color:var(--primary); border-bottom:1px solid var(--accent); padding-bottom:5px;">Your ${days}-Day Expert Itinerary:</h4><ul style="margin-top:15px; list-style-type: none;">`;
+        let html = `<h4 style="color:var(--primary); border-bottom:1px solid var(--accent); padding-bottom:5px;">Yatra from ${start} (${days} Days):</h4><ul style="margin-top:15px; list-style-type: none;">`;
         const schedules = {
             "1": ["Morning: Virupaksha Temple & Hemakuta Hill.", "Afternoon: Krishna Temple & Badavi Linga.", "Sunset: Vittala Temple Stone Chariot."],
             "2": ["Day 1: Sacred Center (Virupaksha, Riverside).", "Day 2: Royal Center (Lotus Mahal, Elephant Stables)."],
@@ -477,7 +493,11 @@
     let isSelecting = false, selection = [], foundWords = [];
     function initWordSearch() {
         foundWords = [];
-        document.querySelectorAll('.clue-item').forEach(i => i.style.textDecoration = 'none');
+        document.querySelectorAll('.clue-item').forEach(i => {
+            i.style.textDecoration = 'none';
+            i.style.color = 'inherit';
+            i.style.fontWeight = 'normal';
+        });
         const grid = document.getElementById('ws-grid'); grid.innerHTML = '';
         let matrix = Array(12).fill().map(() => Array(12).fill(''));
         words.forEach(w => {
@@ -485,76 +505,149 @@
             while(!placed) {
                 let dir = Math.random() > 0.5 ? {r:0,c:1} : {r:1,c:0};
                 let r = Math.floor(Math.random()*(12 - dir.r*w.length)), c = Math.floor(Math.random()*(12 - dir.c*w.length));
-                if(w.split('').every((char, i) => matrix[r+i*dir.r][c+i*dir.c] === '')) {
+                let canPlace = true;
+                for(let i=0; i<w.length; i++) {
+                    if(matrix[r+i*dir.r][c+i*dir.c] !== '' && matrix[r+i*dir.r][c+i*dir.c] !== w[i]) {
+                        canPlace = false; break;
+                    }
+                }
+                if(canPlace) {
                     w.split('').forEach((char, i) => matrix[r+i*dir.r][c+i*dir.c] = char); placed = true;
                 }
             }
         });
         matrix.forEach((row, r) => row.forEach((char, c) => {
             let cell = document.createElement('div'); cell.className = 'grid-cell'; cell.innerText = char || "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[Math.floor(Math.random()*26)];
-            cell.onmousedown = () => { isSelecting = true; selection = [cell]; cell.classList.add('selecting'); };
+            cell.onmousedown = (e) => { e.preventDefault(); isSelecting = true; selection = [cell]; cell.classList.add('selecting'); };
             cell.onmouseenter = () => { if(isSelecting && !selection.includes(cell)) { selection.push(cell); cell.classList.add('selecting'); } };
             grid.appendChild(cell);
         }));
-        window.onmouseup = () => {
-            if(!isSelecting) return; isSelecting = false;
-            let str = selection.map(c => c.innerText).join('');
-            if(words.includes(str) && !foundWords.includes(str)) {
-                foundWords.push(str); selection.forEach(c => { c.classList.remove('selecting'); c.classList.add('found'); });
-                document.getElementById(`clue-${str}`).style.textDecoration = 'line-through';
-                document.getElementById(`clue-${str}`).style.color = '#888';
-            } else { selection.forEach(c => c.classList.remove('selecting')); }
-            selection = [];
-        };
     }
+    
+    window.onmouseup = () => {
+        if(!isSelecting) return; isSelecting = false;
+        let str = selection.map(c => c.innerText).join('');
+        if(words.includes(str) && !foundWords.includes(str)) {
+            foundWords.push(str); selection.forEach(c => { c.classList.remove('selecting'); c.classList.add('found'); });
+            const clue = document.getElementById(`clue-${str}`);
+            clue.style.textDecoration = 'line-through';
+            clue.style.color = 'var(--success)';
+            clue.style.fontWeight = 'bold';
+        } else { selection.forEach(c => c.classList.remove('selecting')); }
+        selection = [];
+    };
 
-    // 3. Quiz Logic
+    // 3. Quiz Logic (10 Questions based on temples)
     const quizData = [
-        { q: "Which temple is famous for 56 musical pillars?", a: "Vittala Temple", o: ["Vittala Temple", "Virupaksha Temple", "Lotus Mahal", "Hazara Rama Temple"] },
-        { q: "What does 'Sasivekalu' mean in Kannada?", a: "Mustard Seed", o: ["Mustard Seed", "Elephant", "Big Stone", "Holy Water"] },
-        { q: "The Lotus Mahal features architectural styles from Hindu and?", a: "Islamic", o: ["Islamic", "Gothic", "Buddhist", "Roman"] }
+        { q: "Which temple is famous for 56 musical pillars that produce different notes?", a: "Vittala Temple", o: ["Vittala Temple", "Virupaksha Temple", "Achyutaraya Temple", "Krishna Temple"] },
+        { q: "The 'Stone Chariot' is the iconic symbol of which complex?", a: "Vittala Temple", o: ["Elephant Stables", "Lotus Mahal", "Vittala Temple", "Hazara Rama"] },
+        { q: "What does the name 'Sasivekalu' Ganesha translate to in English?", a: "Mustard Seed Ganesha", o: ["Giant Ganesha", "Mustard Seed Ganesha", "Stone Ganesha", "Broken Ganesha"] },
+        { q: "Which temple was used as a private place of worship for the Vijayanagara Kings?", a: "Hazara Rama Temple", o: ["Virupaksha Temple", "Krishna Temple", "Hazara Rama Temple", "Badavi Linga"] },
+        { q: "The Lotus Mahal is an example of which architectural fusion?", a: "Indo-Islamic", o: ["Hindu-Gothic", "Indo-Islamic", "Buddhist-Hindu", "Dravidian-Roman"] },
+        { q: "Which temple is the oldest functional temple in Hampi?", a: "Virupaksha Temple", o: ["Virupaksha Temple", "Vittala Temple", "Pattabhirama Temple", "Achyutaraya Temple"] },
+        { q: "How many domed chambers do the Elephant Stables have?", a: "11", o: ["7", "9", "11", "12"] },
+        { q: "The Badavi Linga is unique because it is permanently...?", a: "Surrounded by water", o: ["Gold plated", "Surrounded by water", "Inside a cave", "Made of wood"] },
+        { q: "Which hill offers the best sunset view of the Virupaksha Temple?", a: "Hemakuta Hill", o: ["Matanga Hill", "Hemakuta Hill", "Anjanadri Hill", "Malyavanta Hill"] },
+        { q: "The Stepped Tank in the Royal Enclosure is made of which stone?", a: "Black Schist", o: ["Red Sandstone", "Black Schist", "White Marble", "Granite"] }
     ];
     let qIdx = 0, score = 0;
+    
     function renderQuiz() {
+        const qContainer = document.getElementById('quiz-container');
+        const qResult = document.getElementById('quiz-result');
+        qContainer.style.display = 'block';
+        qResult.style.display = 'none';
+
         const q = quizData[qIdx];
         document.getElementById('quiz-q').innerText = `Question ${qIdx+1}: ${q.q}`;
-        const opts = document.getElementById('quiz-opts'); opts.innerHTML = '';
+        const opts = document.getElementById('quiz-opts'); 
+        opts.innerHTML = '';
+        
         q.o.forEach(o => {
-            let b = document.createElement('button'); b.className = 'quiz-option'; b.innerText = o;
+            let b = document.createElement('button'); 
+            b.className = 'quiz-option'; 
+            b.innerText = o;
             b.onclick = () => {
-                if(o === q.a) { b.classList.add('correct'); score++; } else { b.classList.add('wrong'); }
-                document.querySelectorAll('.quiz-option').forEach(btn => btn.onclick = null);
-                setTimeout(() => { qIdx++; if(qIdx < quizData.length) renderQuiz(); else showScore(); }, 800);
+                const allButtons = opts.querySelectorAll('.quiz-option');
+                allButtons.forEach(btn => btn.disabled = true);
+                
+                if(o === q.a) { 
+                    b.classList.add('correct'); 
+                    score++; 
+                } else { 
+                    b.classList.add('wrong'); 
+                    // Show the correct one
+                    allButtons.forEach(btn => {
+                        if(btn.innerText === q.a) btn.classList.add('correct');
+                    });
+                }
+                
+                setTimeout(() => { 
+                    qIdx++; 
+                    if(qIdx < quizData.length) {
+                        renderQuiz(); 
+                    } else { 
+                        showScore(); 
+                    }
+                }, 1200);
             };
             opts.appendChild(b);
         });
     }
+
     function showScore() {
         document.getElementById('quiz-container').style.display = 'none';
         document.getElementById('quiz-result').style.display = 'block';
-        document.getElementById('quiz-score').innerText = `Your Score: ${score} / ${quizData.length}`;
+        document.getElementById('quiz-score').innerText = `Yatra Complete! Your Score: ${score} / ${quizData.length}`;
     }
-    function restartQuiz() { qIdx = 0; score = 0; document.getElementById('quiz-container').style.display = 'block'; document.getElementById('quiz-result').style.display = 'none'; renderQuiz(); }
+
+    function restartQuiz() { 
+        qIdx = 0; 
+        score = 0; 
+        renderQuiz(); 
+    }
 
     // 4. Chatbot Logic
-    function toggleChat() { let w = document.getElementById('chat-window'); w.style.display = w.style.display === 'flex' ? 'none' : 'flex'; }
+    function toggleChat() { 
+        let w = document.getElementById('chat-window'); 
+        w.style.display = w.style.display === 'flex' ? 'none' : 'flex'; 
+    }
+    
     async function sendChat() {
-        let input = document.getElementById('chat-in'); let msg = input.value.trim(); if(!msg) return;
-        addMsg(msg, 'user'); input.value = '';
+        let input = document.getElementById('chat-in'); 
+        let msg = input.value.trim(); 
+        if(!msg) return;
+        addMsg(msg, 'user'); 
+        input.value = '';
         let bot = addMsg("Checking scrolls...", 'bot');
         try {
             const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
                 method:'POST', headers:{'Content-Type':'application/json'},
-                body: JSON.stringify({ contents:[{parts:[{text:msg}]}], systemInstruction:{parts:[{text:"You are a Hampi heritage guide. Answer scholarly questions about Hampi's history and architecture briefly."}]} })
+                body: JSON.stringify({ 
+                    contents:[{parts:[{text:msg}]}], 
+                    systemInstruction:{parts:[{text:"You are a Hampi heritage guide. Answer scholarly questions about Hampi's history and architecture briefly."}]} 
+                })
             });
-            const d = await r.json(); bot.innerText = d.candidates[0].content.parts[0].text;
-        } catch(e) { bot.innerText = "The connection to the empire is unstable."; }
+            const d = await r.json(); 
+            bot.innerText = d.candidates[0].content.parts[0].text;
+        } catch(e) { 
+            bot.innerText = "The connection to the empire is unstable."; 
+        }
     }
-    function addMsg(t, c) { let d = document.createElement('div'); d.className = `msg ${c}`; d.innerText = t; document.getElementById('chat-msgs').appendChild(d); document.getElementById('chat-msgs').scrollTop = 10000; return d; }
+
+    function addMsg(t, c) { 
+        let d = document.createElement('div'); 
+        d.className = `msg ${c}`; 
+        d.innerText = t; 
+        document.getElementById('chat-msgs').appendChild(d); 
+        document.getElementById('chat-msgs').scrollTop = 10000; 
+        return d; 
+    }
 
     // 5. Contact / Email System
     async function submitContact() {
-        let name = document.getElementById('c-name').value; let email = document.getElementById('c-email').value;
+        let name = document.getElementById('c-name').value; 
+        let email = document.getElementById('c-email').value;
         if(!name || !email) return alert("Please fill name and email.");
         document.getElementById('c-stat').innerText = "Scholars are preparing your personalized itinerary...";
         try {
@@ -569,12 +662,20 @@
                 document.getElementById('email-overlay').style.display = 'flex';
                 document.getElementById('c-stat').innerText = "Guide sent to your digital inbox!";
             }, 1000);
-        } catch(e) { document.getElementById('c-stat').innerText = "Error preparing guide."; }
+        } catch(e) { 
+            document.getElementById('c-stat').innerText = "Error preparing guide."; 
+        }
     }
-    function closeEmail() { document.getElementById('email-overlay').style.display = 'none'; }
+
+    function closeEmail() { 
+        document.getElementById('email-overlay').style.display = 'none'; 
+    }
 
     // On Load
-    window.onload = () => { initWordSearch(); renderQuiz(); };
+    window.onload = () => { 
+        initWordSearch(); 
+        renderQuiz(); 
+    };
 </script>
 
 </body>
