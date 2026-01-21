@@ -4,80 +4,327 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hampi Heritage Yatra</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; padding: 0; background: #f4f4f4; }
-        header { background: #8e44ad; color: white; padding: 1rem; text-align: center; }
-        nav { background: #2c3e50; color: white; padding: 10px; text-align: center; }
-        .container { padding: 20px; max-width: 1000px; margin: auto; background: white; }
-        .form-section { background: #ecf0f1; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
-        .itinerary-box { border-left: 5px solid #8e44ad; padding: 10px; margin: 10px 0; background: #fff; }
-        input, select, button { padding: 10px; margin: 5px; width: 200px; }
-        button { background: #8e44ad; color: white; border: none; cursor: pointer; }
-        footer { text-align: center; padding: 20px; background: #2c3e50; color: white; }
+        :root {
+            --primary: #8b4513; /* Saddle Brown */
+            --accent: #d4af37;  /* Gold */
+            --bg: #fdf5e6;      /* Old Lace */
+            --text: #2c2c2c;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('hampi-main.jpg') center/cover;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: -50px auto 50px;
+            padding: 0 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #ddd; /* Placeholder color */
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-content h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--primary);
+            margin-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        .card-content p {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: var(--primary);
+            color: white;
+            margin-top: 50px;
+        }
+
+        /* Nav styles */
+        nav {
+            background: white;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            margin: 0 15px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Hampi Heritage Yatra</h1>
-    <p>Explore the ruins of the Vijayanagara Empire</p>
-</header>
-
 <nav>
-    <a href="#about" style="color:white; margin:10px;">About</a>
-    <a href="#itinerary" style="color:white; margin:10px;">Standard Itinerary</a>
-    <a href="#planner" style="color:white; margin:10px;">Custom Planner</a>
+    <a href="#">Home</a>
+    <a href="#temples">Temples</a>
+    <a href="#complexes">Complexes</a>
+    <a href="#river">River & Nature</a>
 </nav>
 
-<div class="container">
-    <section id="itinerary">
-        <h2>Standard 3-Day Itinerary</h2>
-        <div class="itinerary-box"><strong>Day 1:</strong> Virupapur Gaddi, Anegundi Village, and Monkey Temple.</div>
-        <div class="itinerary-box"><strong>Day 2:</strong> Vittala Temple (Stone Chariot), King’s Balance, and Coracle Ride.</div>
-        <div class="itinerary-box"><strong>Day 3:</strong> Virupaksha Temple, Hemakuta Hill, and Hampi Bazaar.</div>
-    </section>
+<header>
+    <h1>Hampi Heritage Yatra</h1>
+    <p>Explore the timeless ruins of the Vijayanagara Empire</p>
+</header>
 
-    <section id="planner" class="form-section">
-        <h2>Plan Your Custom Yatra</h2>
-        <input type="text" id="location" placeholder="Starting City (e.g., Delhi)">
-        <input type="date" id="date">
-        <select id="days">
-            <option value="1">1 Day</option>
-            <option value="2">2 Days</option>
-            <option value="3">3 Days</option>
-            <option value="4">4+ Days</option>
-        </select>
-        <button onclick="generatePlan()">Generate Itinerary</button>
+<div class="container" id="temples">
+    <div class="grid">
+        
+        <div class="card">
+            <img src="virupaksha.jpg" alt="Virupaksha Temple">
+            <div class="card-content">
+                <h3>Virupaksha Temple</h3>
+                <p>The oldest functional temple in Hampi, dedicated to Lord Shiva. Known for its towering Gopuram and intricate carvings.</p>
+            </div>
+        </div>
 
-        <div id="result" style="margin-top:20px;"></div>
-    </section>
+        <div class="card">
+            <img src="vittala.jpg" alt="Vittala Temple">
+            <div class="card-content">
+                <h3>Vittala Temple</h3>
+                <p>Famous for its Stone Chariot and musical pillars. It represents the pinnacle of Vijayanagara temple architecture.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="achyutaraya.jpg" alt="Achyutaraya Temple">
+            <div class="card-content">
+                <h3>Achyutaraya Temple</h3>
+                <p>Located between Matanga Hill and Gandhamadana, this temple features a grand courtyard and beautiful carvings.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="hazara-rama.jpg" alt="Hazara Rama Temple">
+            <div class="card-content">
+                <h3>Hazara Rama Temple</h3>
+                <p>The private temple of the Kings, adorned with thousands of carvings depicting the Ramayana.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="krishna.jpg" alt="Krishna Temple">
+            <div class="card-content">
+                <h3>Krishna Temple</h3>
+                <p>Built by Krishnadevaraya to celebrate his victory over Udayagiri, known for its elegant carvings of Balakrishna.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="badavi-linga.jpg" alt="Badavi Linga">
+            <div class="card-content">
+                <h3>Badavi Linga</h3>
+                <p>The largest monolithic Shiva Linga in Hampi, permanently surrounded by water in its sanctum.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="sasivekalu.jpg" alt="Sasivekalu Ganesha">
+            <div class="card-content">
+                <h3>Sasivekalu Ganesha</h3>
+                <p>A giant monolithic statue of Lord Ganesha, named after the 'mustard seed' shape of the belly.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="kadalekalu.jpg" alt="Kadalekalu Ganesha">
+            <div class="card-content">
+                <h3>Kadalekalu Ganesha</h3>
+                <p>One of the largest Ganesha statues in South India, situated on the slopes of Hemakuta Hill.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="pattabhirama.jpg" alt="Pattabhirama Temple">
+            <div class="card-content">
+                <h3>Pattabhirama Temple</h3>
+                <p>A sprawling temple complex known for its serene atmosphere and vast pillared halls.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="chandrakeshara.jpg" alt="Chandrakeshavara Temple">
+            <div class="card-content">
+                <h3>Chandrakeshavara Temple</h3>
+                <p>A beautiful temple dedicated to Lord Vishnu, showcasing the detailed artistry of the era.</p>
+            </div>
+        </div>
+
+        <div class="card" id="complexes">
+            <img src="royal-enclosure.jpg" alt="Royal Enclosure">
+            <div class="card-content">
+                <h3>Royal Enclosure</h3>
+                <p>The seat of power, containing the remains of palaces, administrative buildings, and water systems.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="lotus-mahal.jpg" alt="Lotus Mahal">
+            <div class="card-content">
+                <h3>Lotus Mahal</h3>
+                <p>A secular building featuring Indo-Islamic architecture, shaped like a lotus bud.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="elephant-stables.jpg" alt="Elephant Stables">
+            <div class="card-content">
+                <h3>Elephant Stables</h3>
+                <p>A grand structure with 11 domed chambers used to house the royal elephants.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="queens-bath.jpg" alt="Queen's Bath">
+            <div class="card-content">
+                <h3>Queen's Bath</h3>
+                <p>An ornate bathing chamber for the royal ladies, featuring Islamic-style arches and balconies.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="mahanavami.jpg" alt="Mahanavami Dibba">
+            <div class="card-content">
+                <h3>Mahanavami Dibba</h3>
+                <p>A massive stone platform used for royal ceremonies during the Navaratri festival.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="hampi-bazar.jpg" alt="Hampi Bazar">
+            <div class="card-content">
+                <h3>Hampi Bazar</h3>
+                <p>The ancient marketplace stretching in front of the Virupaksha Temple, once a center for global trade.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="virupaksha-bazar.jpg" alt="Virupaksha Bazar">
+            <div class="card-content">
+                <h3>Virupaksha Bazar</h3>
+                <p>A double-storied colonnade that housed merchants and travelers in the 15th century.</p>
+            </div>
+        </div>
+
+        <div class="card" id="river">
+            <img src="tungabhadra.jpg" alt="Tungabhadra River">
+            <div class="card-content">
+                <h3>Tungabhadra River</h3>
+                <p>The lifeline of Hampi, famous for its coracle boat rides and boulder-strewn landscapes.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="stepped-tank.jpg" alt="Stepped Tank">
+            <div class="card-content">
+                <h3>Stepped Tank</h3>
+                <p>An architectural marvel made of black schist, used for ritual bathing by the royals.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="pushkarani.jpg" alt="Pushkarani">
+            <div class="card-content">
+                <h3>Pushkarani</h3>
+                <p>Holy water tanks attached to temples, used for festivals and religious purification.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="aqueducts.jpg" alt="Ancient Aqueducts">
+            <div class="card-content">
+                <h3>Ancient Aqueducts</h3>
+                <p>A sophisticated water management system that supplied water to the entire city.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="underground-shiva.jpg" alt="Underground Shiva Temple">
+            <div class="card-content">
+                <h3>Underground Shiva Temple</h3>
+                <p>A temple built several feet below ground level, often filled with water during the monsoon.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="watch-towers.jpg" alt="Watch Towers">
+            <div class="card-content">
+                <h3>Watch Towers</h3>
+                <p>Strategically placed towers used by guards to keep watch over the royal palace grounds.</p>
+            </div>
+        </div>
+
+    </div>
 </div>
 
-<script>
-    function generatePlan() {
-        const city = document.getElementById('location').value;
-        const days = document.getElementById('days').value;
-        const resultDiv = document.getElementById('result');
-
-        if(!city) { alert("Please enter your start location"); return; }
-
-        let plan = `<h3>Your Plan from ${city}</h3>`;
-        
-        if (days == "1") {
-            plan += "<p><strong>Focus:</strong> Main Temple Complex (Virupaksha & Vittala Temple).</p>";
-        } else if (days == "2") {
-            plan += "<p><strong>Focus:</strong> Day 1: Main Temples; Day 2: Royal Enclosure & Lotus Mahal.</p>";
-        } else {
-            plan += "<p><strong>Focus:</strong> Full Heritage Circuit including Anegundi and Sanapur Lake.</p>";
-        }
-        
-        plan += `<p>Travel Tip: From ${city}, check for trains to Hospet Junction (nearest station).</p>`;
-        resultDiv.innerHTML = plan;
-    }
-</script>
-
 <footer>
-    <p>&copy; 2024 Hampi Heritage Yatra</p>
+    <p>&copy; 2024 Hampi Heritage Yatra | Preserving India's Golden Past</p>
 </footer>
 
 </body>
