@@ -95,6 +95,7 @@
             color: #555;
         }
 
+        /* Nav styles */
         nav {
             background: white;
             padding: 15px;
@@ -114,6 +115,7 @@
             font-size: 0.8rem;
         }
 
+        /* ADDED FEATURE STYLES */
         .section-title { text-align: center; font-family: 'Cinzel', serif; font-size: 2.2rem; color: var(--primary); margin: 60px 0 30px; }
         .game-area { background: white; padding: 60px 0; border-top: 2px solid var(--accent); margin-top: 50px; }
         .game-box { background: #f9f4e8; padding: 30px; border-radius: 15px; margin-bottom: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
@@ -122,13 +124,17 @@
         .grid-cell { width: 30px; height: 30px; background: white; border: 1px solid #ddd; display: flex; justify-content: center; align-items: center; font-weight: bold; cursor: pointer; border-radius: 4px; font-size: 12px; user-select: none; }
         .grid-cell.found { background: var(--success); color: white; }
         .grid-cell.selecting { background: var(--accent); color: white; }
-        
+        .quiz-option { display: block; width: 100%; padding: 12px; margin: 8px 0; background: white; border: 1px solid #ddd; border-radius: 8px; text-align: left; cursor: pointer; transition: 0.2s; font-family: inherit; }
+        .quiz-option:hover { border-color: var(--accent); background: #fffdf5; }
+        .quiz-option.correct { background: var(--success) !important; color: white !important; }
+        .quiz-option.wrong { background: var(--error) !important; color: white !important; }
         .form-group { margin-bottom: 15px; text-align: left; }
         .form-group label { display: block; font-weight: 600; margin-bottom: 5px; color: var(--primary); }
         input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; background: white; }
         .btn { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; transition: 0.3s; }
         .btn:hover { background: #5d2e0d; }
 
+        /* Chatbot */
         #chat-widget { position: fixed; bottom: 20px; right: 20px; z-index: 2000; }
         #chat-btn { width: 60px; height: 60px; background: var(--primary); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; color: var(--accent); font-size: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         #chat-window { position: absolute; bottom: 70px; right: 0; width: 320px; height: 400px; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: none; flex-direction: column; overflow: hidden; }
@@ -139,6 +145,7 @@
         .bot { background: #f0f0f0; align-self: flex-start; color: #333; }
         .user { background: var(--primary); color: white; align-self: flex-end; }
 
+        /* Email Overlay */
         #email-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 9999; }
         .email-card { background: white; width: 90%; max-width: 600px; padding: 40px; border-radius: 12px; max-height: 80vh; overflow-y: auto; position: relative; }
 
@@ -158,12 +165,12 @@
     <a href="#">Home</a>
     <a href="#temples">Temples</a>
     <a href="#planner">Planner</a>
-    <a href="#games">Game</a>
+    <a href="#games">Games</a>
     <a href="#contact">Contact</a>
 </nav>
 
 <header>
-    <h1>Hampī Itihāsa Anusandhāna</h1>
+    <h1>Hampi Heritage Yatra</h1>
     <p>Explore the timeless ruins of the Vijayanagara Empire</p>
 </header>
 
@@ -176,6 +183,7 @@
                 <p>The oldest functional temple in Hampi, dedicated to Lord Shiva. Known for its towering Gopuram and intricate carvings.</p>
             </div>
         </div>
+
         <div class="card">
             <img src="vittala.jpg" alt="Vittala Temple" onerror="this.src='https://images.unsplash.com/photo-1544274411-a7af6de9a96d?auto=format&fit=crop&w=500'">
             <div class="card-content">
@@ -183,6 +191,7 @@
                 <p>Famous for its Stone Chariot and musical pillars. It represents the pinnacle of Vijayanagara temple architecture.</p>
             </div>
         </div>
+
         <div class="card">
             <img src="Achyutaraya.jfif" alt="Achyutaraya Temple" onerror="this.src='https://images.unsplash.com/photo-1623157545939-503437e6f823?auto=format&fit=crop&w=500'">
             <div class="card-content">
@@ -190,13 +199,15 @@
                 <p>Located between Matanga Hill and Gandhamadana, this temple features a grand courtyard and beautiful carvings.</p>
             </div>
         </div>
+
         <div class="card">
-            <img src="Hazara Rama Temple.jfif" alt="Hazara Rama Temple" onerror="this.src='https://images.unsplash.com/photo-1600100397608-f09075706497?auto=format&fit=crop&w=500'">
+            <img src="Hazara Rama.jfif" alt="Hazara Rama Temple" onerror="this.src='https://images.unsplash.com/photo-1600100397608-f09075706497?auto=format&fit=crop&w=500'">
             <div class="card-content">
                 <h3>Hazara Rama Temple</h3>
                 <p>The private temple of the Kings, adorned with thousands of carvings depicting the Ramayana.</p>
             </div>
         </div>
+
         <div class="card">
             <img src="Krishna Temple.jpg" alt="Krishna Temple" onerror="this.src='https://images.unsplash.com/photo-1580193183311-8255977936a7?auto=format&fit=crop&w=500'">
             <div class="card-content">
@@ -204,6 +215,7 @@
                 <p>Built by Krishnadevaraya to celebrate his victory over Udayagiri, known for its elegant carvings of Balakrishna.</p>
             </div>
         </div>
+
         <div class="card">
             <img src="Shree Badavilinga Gudi.jpg" alt="Shree Badavilinga Gudi" onerror="this.src='https://images.unsplash.com/photo-1603565928429-5763bd03d745?auto=format&fit=crop&w=500'">
             <div class="card-content">
@@ -211,9 +223,138 @@
                 <p>The largest monolithic Shiva Linga in Hampi, permanently surrounded by water in its sanctum.</p>
             </div>
         </div>
+
+        <div class="card">
+            <img src="Sasivekalu Ganesha.jpg" alt="Sasivekalu Ganesha" onerror="this.src='https://images.unsplash.com/photo-1590050752117-23aae2368b19?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Sasivekalu Ganesha</h3>
+                <p>A giant monolithic statue of Lord Ganesha, named after the 'mustard seed' shape of the belly.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Kadalekalu Ganesha.jpg" alt="Kadalekalu Ganesha" onerror="this.src='https://images.unsplash.com/photo-1590766948510-d008f3684a0c?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Kadalekalu Ganesha</h3>
+                <p>One of the largest Ganesha statues in South India, situated on the slopes of Hemakuta Hill.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Pattabhirama Temple.jpg" alt="Pattabhirama Temple" onerror="this.src='https://images.unsplash.com/photo-1544274411-a7af6de9a96d?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Pattabhirama Temple</h3>
+                <p>A sprawling temple complex known for its serene atmosphere and vast pillared halls.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Chandrakeshavara Temple.jpg" alt="Chandrakeshavara Temple" onerror="this.src='https://images.unsplash.com/photo-1623157545939-503437e6f823?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Chandrakeshavara Temple</h3>
+                <p>A beautiful temple dedicated to Lord Vishnu, showcasing the detailed artistry of the era.</p>
+            </div>
+        </div>
+
+        <div class="card" id="complexes">
+            <img src="Royal Enclosure.jpg" alt="Royal Enclosure" onerror="this.src='https://images.unsplash.com/photo-1600100397608-f09075706497?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Royal Enclosure</h3>
+                <p>The seat of power, containing the remains of palaces, administrative buildings, and water systems.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Lotus Mahal.jpg" alt="Lotus Mahal" onerror="this.src='https://images.unsplash.com/photo-1580193183311-8255977936a7?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Lotus Mahal</h3>
+                <p>A secular building featuring Indo-Islamic architecture, shaped like a lotus bud.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Elephant Stables.jpg" alt="Elephant Stables" onerror="this.src='https://images.unsplash.com/photo-1603565928429-5763bd03d745?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Elephant Stables</h3>
+                <p>A grand structure with 11 domed chambers used to house the royal elephants.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Queen's Bath.jpg" alt="Queen's Bath" onerror="this.src='https://images.unsplash.com/photo-1590050752117-23aae2368b19?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Queen's Bath</h3>
+                <p>An ornate bathing chamber for the royal ladies, featuring Islamic-style arches and balconies.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Mahanavami Dibba.jpg" alt="Mahanavami Dibba" onerror="this.src='https://images.unsplash.com/photo-1590766948510-d008f3684a0c?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Mahanavami Dibba</h3>
+                <p>A massive stone platform used for royal ceremonies during the Navaratri festival.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Hampi Bazar.jfif" alt="Hampi Bazar" onerror="this.src='https://images.unsplash.com/photo-1544274411-a7af6de9a96d?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Hampi Bazar</h3>
+                <p>The ancient marketplace stretching in front of the Virupaksha Temple, once a center for global trade.</p>
+            </div>
+        </div>
+
+        <div class="card" id="river">
+            <img src="Tungabhadra River.jpg" alt="Tungabhadra River" onerror="this.src='https://images.unsplash.com/photo-1600100397608-f09075706497?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Tungabhadra River</h3>
+                <p>The lifeline of Hampi, famous for its coracle boat rides and boulder-strewn landscapes.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="stepped tank .jpg" alt="Stepped Tank" onerror="this.src='https://images.unsplash.com/photo-1580193183311-8255977936a7?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Stepped Tank</h3>
+                <p>An architectural marvel made of black schist, used for ritual bathing by the royals.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Pushkarani.jfif" alt="Pushkarani" onerror="this.src='https://images.unsplash.com/photo-1603565928429-5763bd03d745?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Pushkarani</h3>
+                <p>Holy water tanks attached to temples, used for festivals and religious purification.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Ancient Aqueducts.jfif" alt="Ancient Aqueducts" onerror="this.src='https://images.unsplash.com/photo-1590050752117-23aae2368b19?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Ancient Aqueducts</h3>
+                <p>A sophisticated water management system that supplied water to the entire city.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Underground Shiva Temple.jfif" alt="Underground Shiva Temple" onerror="this.src='https://images.unsplash.com/photo-1590766948510-d008f3684a0c?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Underground Shiva Temple</h3>
+                <p>A temple built several feet below ground level, often filled with water during the monsoon.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Watch Towers.jfif" alt="Watch Towers" onerror="this.src='https://images.unsplash.com/photo-1544274411-a7af6de9a96d?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Watch Towers</h3>
+                <p>Strategically placed towers used by guards to keep watch over the royal palace grounds.</p>
+            </div>
+        </div>
     </div>
 </div>
 
+<!-- PLANNER SECTION -->
 <section id="planner" class="container" style="margin-top: 80px;">
     <h2 class="section-title">5-Day Yatra Planner</h2>
     <div style="background:white; padding:40px; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.05); margin-bottom: 50px;">
@@ -225,12 +366,14 @@
                     <option value="Hyderabad">Hyderabad</option>
                     <option value="Goa">Goa</option>
                     <option value="Mumbai">Mumbai</option>
+                    <option value="Chennai">Chennai</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>Duration</label>
                 <select id="yatra-days">
                     <option value="1">1 Day (Express)</option>
+                    <option value="2">2 Days (Standard)</option>
                     <option value="3">3 Days (Leisurely)</option>
                     <option value="5" selected>5 Days (Heritage Master)</option>
                 </select>
@@ -241,46 +384,60 @@
     </div>
 </section>
 
+<!-- GAMES SECTION -->
 <section id="games" class="game-area">
     <div class="container">
-        <h2 class="section-title">Interactive Heritage Game</h2>
+        <h2 class="section-title">Heritage Knowledge Games</h2>
         
         <div class="game-box">
-            <h3 style="font-family:'Cinzel'; margin-bottom:20px; color: var(--primary);">Temple Word Search</h3>
+            <h3 style="font-family:'Cinzel'; margin-bottom:20px; color: var(--primary);">Game 1: Temple Word Search</h3>
             <div class="word-search-container">
                 <div id="ws-grid" class="word-grid"></div>
                 <div style="text-align: left; max-width: 300px;">
                     <h4 style="margin-bottom: 10px;">Solve the Clues:</h4>
                     <div class="clue-item" id="clue-VITTALA" style="margin-bottom: 8px; font-size: 0.9rem;">1. Home of the Stone Chariot & Musical Pillars.</div>
                     <div class="clue-item" id="clue-HAMPI" style="margin-bottom: 8px; font-size: 0.9rem;">2. The village containing the UNESCO ruins.</div>
-                    <div class="clue-item" id="clue-LOTUS" style="margin-bottom: 8px; font-size: 0.9rem;">3. The Mahal shaped like a flower.</div>
-                    <div class="clue-item" id="clue-RAMA" style="margin-bottom: 8px; font-size: 0.9rem;">4. The Royal temple of Ramayana.</div>
-                    <div class="clue-item" id="clue-LINGA" style="margin-bottom: 8px; font-size: 0.9rem;">5. Monolithic Shiva symbol.</div>
+                    <div class="clue-item" id="clue-LOTUS" style="margin-bottom: 8px; font-size: 0.9rem;">3. The Mahal shaped like a blossoming flower.</div>
+                    <div class="clue-item" id="clue-RAMA" style="margin-bottom: 8px; font-size: 0.9rem;">4. The Royal temple depicting the Ramayana.</div>
+                    <div class="clue-item" id="clue-LINGA" style="margin-bottom: 8px; font-size: 0.9rem;">5. Monolithic Shiva symbol in Badavi Temple.</div>
                 </div>
             </div>
-            <div style="text-align: center; margin-top: 20px;">
-                <button class="btn" style="width:auto; padding:8px 25px;" onclick="initWordSearch()">Reset Grid</button>
+            <button class="btn" style="width:auto; margin-top:20px; padding:8px 20px;" onclick="initWordSearch()">Reset Grid</button>
+        </div>
+
+        <div class="game-box">
+            <h3 style="font-family:'Cinzel'; margin-bottom:20px; color: var(--primary);">Game 2: Heritage Master Quiz</h3>
+            <div id="quiz-container" style="text-align: left;">
+                <p id="quiz-q" style="font-weight:600; margin-bottom:15px; font-size: 1.1rem;">Loading Question...</p>
+                <div id="quiz-opts"></div>
+            </div>
+            <div id="quiz-result" style="display:none; text-align:center;">
+                <p id="quiz-score" style="font-size:1.5rem; margin-bottom:15px; font-weight: bold; color: var(--primary);"></p>
+                <button class="btn" style="width:auto;" onclick="restartQuiz()">Try Again</button>
             </div>
         </div>
     </div>
 </section>
 
-<section id="contact" class="container" style="padding: 80px 0;">
+<!-- CONTACT SECTION -->
+<section id="contact" class="container" style="padding: 80px 0; margin-top: 0;">
     <h2 class="section-title">Request Detailed Yatra Guide</h2>
     <div style="max-width:600px; margin:0 auto; background:white; padding:40px; border-radius:15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
         <div class="form-group"><label>Full Name</label><input type="text" id="c-name"></div>
         <div class="form-group"><label>Email Address</label><input type="email" id="c-email"></div>
+        <div class="form-group"><label>Interests</label><textarea id="c-msg" rows="4" placeholder="Tell us what you want to learn about Hampi..."></textarea></div>
         <button class="btn" onclick="submitContact()">Send Request & Get PDF Guide</button>
-        <p id="c-stat" style="margin-top:15px; font-size:0.85rem; text-align:center; color: var(--primary);"></p>
+        <p id="c-stat" style="margin-top:15px; font-size:0.85rem; text-align:center; color: var(--primary); font-weight: 600;"></p>
     </div>
 </section>
 
+<!-- CHATBOT WIDGET -->
 <div id="chat-widget">
     <div id="chat-btn" onclick="toggleChat()">💬</div>
     <div id="chat-window">
         <div id="chat-header"><span>Hampi AI Guide</span><span style="cursor:pointer" onclick="toggleChat()">×</span></div>
         <div id="chat-msgs">
-            <div class="msg bot">Namaste! I am the digital caretaker of Hampī. Ask me anything!</div>
+            <div class="msg bot">Namaste! I am the digital caretaker of Hampī. Ask me anything about the ruins!</div>
         </div>
         <div class="chat-input-area">
             <input type="text" id="chat-in" placeholder="Ask about musical pillars..." onkeypress="if(event.key=='Enter')sendChat()">
@@ -289,6 +446,7 @@
     </div>
 </div>
 
+<!-- EMAIL OVERLAY -->
 <div id="email-overlay">
     <div class="email-card">
         <h2 style="color:var(--primary); border-bottom:2px solid var(--accent); padding-bottom:10px; font-family: 'Cinzel';">New Message: Your Yatra Guide</h2>
@@ -306,48 +464,58 @@
             <span class="collab-tag">B Avikshit</span>
             <span class="collab-tag">Chirag M</span>
         </div>
-        <p>&copy; 2024 Hampī Itihāsa Anusandhāna | Preserving India's Golden Past</p>
+        <p>&copy; 2024 Hampi Heritage Yatra | Preserving India's Golden Past</p>
     </div>
 </footer>
 
 <script>
     const apiKey = ""; 
 
+    // 1. Planner Logic
     function buildPlan() {
         const days = document.getElementById('yatra-days').value;
         const start = document.getElementById('start-node').value;
         const out = document.getElementById('plan-output');
-        let html = `<h4 style="color:var(--primary); border-bottom:1px solid var(--accent);">Yatra from ${start} (${days} Days):</h4><ul style="margin-top:15px;">`;
+        let html = `<h4 style="color:var(--primary); border-bottom:1px solid var(--accent); padding-bottom:5px;">Yatra from ${start} (${days} Days):</h4><ul style="margin-top:15px; list-style-type: none;">`;
         const schedules = {
-            "1": ["Morning: Virupaksha Temple.", "Afternoon: Krishna Temple.", "Sunset: Vittala Temple."],
-            "3": ["Day 1: Monoliths.", "Day 2: Royal Enclosure.", "Day 3: Vittala Complex."],
-            "5": ["Day 1: Arrival.", "Day 2: Sacred Center.", "Day 3: Royal Center.", "Day 4: Riverside ruins.", "Day 5: Matanga Hill."]
+            "1": ["Morning: Virupaksha Temple & Hemakuta Hill.", "Afternoon: Krishna Temple & Badavi Linga.", "Sunset: Vittala Temple Stone Chariot."],
+            "2": ["Day 1: Sacred Center (Virupaksha, Riverside).", "Day 2: Royal Center (Lotus Mahal, Elephant Stables)."],
+            "3": ["Day 1: The Monoliths & Virupaksha.", "Day 2: Royal Enclosure & Queen's Bath.", "Day 3: Vittala Temple & Coracle Ride."],
+            "5": ["Day 1: Arrival & Hemakuta Sunset.", "Day 2: Sacred Center Exploration.", "Day 3: Royal Center & Zenana Enclosure.", "Day 4: Riverside ruins & Vittala Complex.", "Day 5: Matanga Hill Trek & Anegundi."]
         };
-        schedules[days].forEach(d => html += `<li style="margin-bottom:8px;">${d}</li>`);
+        schedules[days].forEach((d, i) => html += `<li style="margin-bottom:10px;"><strong>${d.split(':')[0]}:</strong>${d.split(':')[1]}</li>`);
         html += `</ul>`;
         out.innerHTML = html; out.style.display = 'block';
     }
 
+    // 2. Word Search Logic
     const words = ["VITTALA", "HAMPI", "LOTUS", "RAMA", "LINGA"];
     let isSelecting = false, selection = [], foundWords = [];
-    
     function initWordSearch() {
         foundWords = [];
-        document.querySelectorAll('.clue-item').forEach(i => { i.style.textDecoration = 'none'; i.style.color = 'inherit'; });
+        document.querySelectorAll('.clue-item').forEach(i => {
+            i.style.textDecoration = 'none';
+            i.style.color = 'inherit';
+            i.style.fontWeight = 'normal';
+        });
         const grid = document.getElementById('ws-grid'); grid.innerHTML = '';
         let matrix = Array(12).fill().map(() => Array(12).fill(''));
-        
         words.forEach(w => {
             let placed = false;
             while(!placed) {
                 let dir = Math.random() > 0.5 ? {r:0,c:1} : {r:1,c:0};
                 let r = Math.floor(Math.random()*(12 - dir.r*w.length)), c = Math.floor(Math.random()*(12 - dir.c*w.length));
                 let canPlace = true;
-                for(let i=0; i<w.length; i++) if(matrix[r+i*dir.r][c+i*dir.c] !== '') canPlace = false;
-                if(canPlace) { w.split('').forEach((char, i) => matrix[r+i*dir.r][c+i*dir.c] = char); placed = true; }
+                for(let i=0; i<w.length; i++) {
+                    if(matrix[r+i*dir.r][c+i*dir.c] !== '' && matrix[r+i*dir.r][c+i*dir.c] !== w[i]) {
+                        canPlace = false; break;
+                    }
+                }
+                if(canPlace) {
+                    w.split('').forEach((char, i) => matrix[r+i*dir.r][c+i*dir.c] = char); placed = true;
+                }
             }
         });
-        
         matrix.forEach((row, r) => row.forEach((char, c) => {
             let cell = document.createElement('div'); cell.className = 'grid-cell'; cell.innerText = char || "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[Math.floor(Math.random()*26)];
             cell.onmousedown = (e) => { e.preventDefault(); isSelecting = true; selection = [cell]; cell.classList.add('selecting'); };
@@ -361,47 +529,153 @@
         let str = selection.map(c => c.innerText).join('');
         if(words.includes(str) && !foundWords.includes(str)) {
             foundWords.push(str); selection.forEach(c => { c.classList.remove('selecting'); c.classList.add('found'); });
-            document.getElementById(`clue-${str}`).style.textDecoration = 'line-through';
-            document.getElementById(`clue-${str}`).style.color = 'var(--success)';
+            const clue = document.getElementById(`clue-${str}`);
+            clue.style.textDecoration = 'line-through';
+            clue.style.color = 'var(--success)';
+            clue.style.fontWeight = 'bold';
         } else { selection.forEach(c => c.classList.remove('selecting')); }
         selection = [];
     };
 
-    function toggleChat() { let w = document.getElementById('chat-window'); w.style.display = w.style.display === 'flex' ? 'none' : 'flex'; }
+    // 3. Quiz Logic (10 Questions based on temples)
+    const quizData = [
+        { q: "Which temple is famous for 56 musical pillars that produce different notes?", a: "Vittala Temple", o: ["Vittala Temple", "Virupaksha Temple", "Achyutaraya Temple", "Krishna Temple"] },
+        { q: "The 'Stone Chariot' is the iconic symbol of which complex?", a: "Vittala Temple", o: ["Elephant Stables", "Lotus Mahal", "Vittala Temple", "Hazara Rama"] },
+        { q: "What does the name 'Sasivekalu' Ganesha translate to in English?", a: "Mustard Seed Ganesha", o: ["Giant Ganesha", "Mustard Seed Ganesha", "Stone Ganesha", "Broken Ganesha"] },
+        { q: "Which temple was used as a private place of worship for the Vijayanagara Kings?", a: "Hazara Rama Temple", o: ["Virupaksha Temple", "Krishna Temple", "Hazara Rama Temple", "Badavi Linga"] },
+        { q: "The Lotus Mahal is an example of which architectural fusion?", a: "Indo-Islamic", o: ["Hindu-Gothic", "Indo-Islamic", "Buddhist-Hindu", "Dravidian-Roman"] },
+        { q: "Which temple is the oldest functional temple in Hampi?", a: "Virupaksha Temple", o: ["Virupaksha Temple", "Vittala Temple", "Pattabhirama Temple", "Achyutaraya Temple"] },
+        { q: "How many domed chambers do the Elephant Stables have?", a: "11", o: ["7", "9", "11", "12"] },
+        { q: "The Badavi Linga is unique because it is permanently...?", a: "Surrounded by water", o: ["Gold plated", "Surrounded by water", "Inside a cave", "Made of wood"] },
+        { q: "Which hill offers the best sunset view of the Virupaksha Temple?", a: "Hemakuta Hill", o: ["Matanga Hill", "Hemakuta Hill", "Anjanadri Hill", "Malyavanta Hill"] },
+        { q: "The Stepped Tank in the Royal Enclosure is made of which stone?", a: "Black Schist", o: ["Red Sandstone", "Black Schist", "White Marble", "Granite"] }
+    ];
+    let qIdx = 0, score = 0;
+    
+    function renderQuiz() {
+        const qContainer = document.getElementById('quiz-container');
+        const qResult = document.getElementById('quiz-result');
+        qContainer.style.display = 'block';
+        qResult.style.display = 'none';
+
+        const q = quizData[qIdx];
+        document.getElementById('quiz-q').innerText = `Question ${qIdx+1}: ${q.q}`;
+        const opts = document.getElementById('quiz-opts'); 
+        opts.innerHTML = '';
+        
+        q.o.forEach(o => {
+            let b = document.createElement('button'); 
+            b.className = 'quiz-option'; 
+            b.innerText = o;
+            b.onclick = () => {
+                const allButtons = opts.querySelectorAll('.quiz-option');
+                allButtons.forEach(btn => btn.disabled = true);
+                
+                if(o === q.a) { 
+                    b.classList.add('correct'); 
+                    score++; 
+                } else { 
+                    b.classList.add('wrong'); 
+                    // Show the correct one
+                    allButtons.forEach(btn => {
+                        if(btn.innerText === q.a) btn.classList.add('correct');
+                    });
+                }
+                
+                setTimeout(() => { 
+                    qIdx++; 
+                    if(qIdx < quizData.length) {
+                        renderQuiz(); 
+                    } else { 
+                        showScore(); 
+                    }
+                }, 1200);
+            };
+            opts.appendChild(b);
+        });
+    }
+
+    function showScore() {
+        document.getElementById('quiz-container').style.display = 'none';
+        document.getElementById('quiz-result').style.display = 'block';
+        document.getElementById('quiz-score').innerText = `Yatra Complete! Your Score: ${score} / ${quizData.length}`;
+    }
+
+    function restartQuiz() { 
+        qIdx = 0; 
+        score = 0; 
+        renderQuiz(); 
+    }
+
+    // 4. Chatbot Logic
+    function toggleChat() { 
+        let w = document.getElementById('chat-window'); 
+        w.style.display = w.style.display === 'flex' ? 'none' : 'flex'; 
+    }
     
     async function sendChat() {
-        let input = document.getElementById('chat-in'); let msg = input.value.trim(); if(!msg) return;
-        addMsg(msg, 'user'); input.value = '';
+        let input = document.getElementById('chat-in'); 
+        let msg = input.value.trim(); 
+        if(!msg) return;
+        addMsg(msg, 'user'); 
+        input.value = '';
         let bot = addMsg("Checking scrolls...", 'bot');
         try {
             const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
                 method:'POST', headers:{'Content-Type':'application/json'},
-                body: JSON.stringify({ contents:[{parts:[{text:msg}]}], systemInstruction:{parts:[{text:"You are a Hampi heritage guide."}]} })
+                body: JSON.stringify({ 
+                    contents:[{parts:[{text:msg}]}], 
+                    systemInstruction:{parts:[{text:"You are a Hampi heritage guide. Answer scholarly questions about Hampi's history and architecture briefly."}]} 
+                })
             });
-            const d = await r.json(); bot.innerText = d.candidates?.[0]?.content?.parts?.[0]?.text || "Namaste, the network is faint in these ruins.";
-        } catch(e) { bot.innerText = "Connection lost."; }
+            const d = await r.json(); 
+            bot.innerText = d.candidates[0].content.parts[0].text;
+        } catch(e) { 
+            bot.innerText = "The connection to the empire is unstable."; 
+        }
     }
 
-    function addMsg(t, c) { let d = document.createElement('div'); d.className = `msg ${c}`; d.innerText = t; document.getElementById('chat-msgs').appendChild(d); return d; }
+    function addMsg(t, c) { 
+        let d = document.createElement('div'); 
+        d.className = `msg ${c}`; 
+        d.innerText = t; 
+        document.getElementById('chat-msgs').appendChild(d); 
+        document.getElementById('chat-msgs').scrollTop = 10000; 
+        return d; 
+    }
 
+    // 5. Contact / Email System
     async function submitContact() {
-        let name = document.getElementById('c-name').value; let email = document.getElementById('c-email').value;
-        if(!name || !email) return;
-        document.getElementById('c-stat').innerText = "Preparing guide...";
+        let name = document.getElementById('c-name').value; 
+        let email = document.getElementById('c-email').value;
+        if(!name || !email) return alert("Please fill name and email.");
+        document.getElementById('c-stat').innerText = "Scholars are preparing your personalized itinerary...";
         try {
+            const prompt = `Write a professional 5-day Hampi guide for ${name}. Include historical context for Virupaksha and Vittala temples. Sign off from Hampi Heritage Yatra team: Shubham, Sai Krishna, Avikshit, and Chirag.`;
             const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
                 method:'POST', headers:{'Content-Type':'application/json'},
-                body: JSON.stringify({ contents:[{parts:[{text:`Write a 5-day Hampi guide for ${name}.`}]}] })
+                body: JSON.stringify({ contents:[{parts:[{text:prompt}]}] })
             });
             const d = await r.json();
-            document.getElementById('email-content').innerText = d.candidates?.[0]?.content?.parts?.[0]?.text || "Guide content unavailable.";
-            document.getElementById('email-overlay').style.display = 'flex';
-            document.getElementById('c-stat').innerText = "Guide sent!";
-        } catch(e) { document.getElementById('c-stat').innerText = "Error."; }
+            setTimeout(() => {
+                document.getElementById('email-content').innerText = d.candidates[0].content.parts[0].text;
+                document.getElementById('email-overlay').style.display = 'flex';
+                document.getElementById('c-stat').innerText = "Guide sent to your digital inbox!";
+            }, 1000);
+        } catch(e) { 
+            document.getElementById('c-stat').innerText = "Error preparing guide."; 
+        }
     }
 
-    function closeEmail() { document.getElementById('email-overlay').style.display = 'none'; }
-    window.onload = () => { initWordSearch(); };
+    function closeEmail() { 
+        document.getElementById('email-overlay').style.display = 'none'; 
+    }
+
+    // On Load
+    window.onload = () => { 
+        initWordSearch(); 
+        renderQuiz(); 
+    };
 </script>
 
 </body>
