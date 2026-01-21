@@ -3,28 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hampi Heritage Yatra</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <title>Hampi Heritage Yatra | The Golden Empire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #8b4513; /* Saddle Brown */
-            --accent: #d4af37;  /* Gold */
-            --bg: #fdf5e6;      /* Old Lace */
+            --primary: #8b4513; 
+            --accent: #d4af37;  
+            --bg: #fdf5e6;      
             --text: #2c2c2c;
+            --white: #ffffff;
+            --stone: #a0937d;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
 
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg);
             color: var(--text);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            text-align: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            margin: 0 15px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover { color: var(--accent); }
+
+        /* Header */
         header {
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('hampi-main.jpg') center/cover;
-            height: 60vh;
+            height: 70vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -36,86 +63,172 @@
 
         header h1 {
             font-family: 'Cinzel', serif;
-            font-size: 3.5rem;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
             margin-bottom: 10px;
             color: var(--accent);
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
         }
 
-        .container {
-            max-width: 1200px;
-            margin: -50px auto 50px;
-            padding: 0 20px;
+        header p { font-size: 1.2rem; font-style: italic; opacity: 0.9; }
+
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin: 60px 0 30px;
+            position: relative;
         }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+            margin: 10px auto;
+        }
+
+        /* Horizontal Chronology */
+        .chronology-wrapper {
+            background: var(--primary);
+            padding: 50px 0;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .timeline-container {
+            display: flex;
+            overflow-x: auto;
+            padding: 20px;
+            gap: 40px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) var(--primary);
+        }
+
+        .timeline-container::-webkit-scrollbar { height: 8px; }
+        .timeline-container::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+
+        .timeline-item {
+            min-width: 280px;
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-left: 4px solid var(--accent);
+            border-radius: 0 10px 10px 0;
+        }
+
+        .timeline-item h4 { font-family: 'Cinzel', serif; color: var(--accent); font-size: 1.4rem; margin-bottom: 10px; }
+
+        /* Tour Planner */
+        .planner-container {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .planner-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--primary); }
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        .plan-btn {
+            grid-column: span 2;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .plan-btn:hover { background: #5d2e0d; }
+
+        #itinerary-result {
+            margin-top: 30px;
+            padding: 20px;
+            background: var(--bg);
+            border-radius: 8px;
+            display: none;
+        }
+
+        /* Grid & Cards */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
         }
 
         .card {
             background: white;
-            border-radius: 12px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            border-bottom: 4px solid var(--accent);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-        }
+        .card:hover { transform: translateY(-15px); box-shadow: 0 20px 45px rgba(0,0,0,0.15); }
 
+        .card-img-wrapper { position: relative; height: 250px; overflow: hidden; }
         .card img {
             width: 100%;
-            height: 200px;
+            height: 100%;
             object-fit: cover;
-            background-color: #ddd; /* Placeholder color */
+            transition: transform 0.6s;
         }
+        .card:hover img { transform: scale(1.1); }
 
-        .card-content {
-            padding: 20px;
-        }
-
+        .card-content { padding: 30px; flex-grow: 1; }
         .card-content h3 {
             font-family: 'Cinzel', serif;
             color: var(--primary);
-            margin-bottom: 10px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 5px;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--bg);
+            padding-bottom: 10px;
         }
 
-        .card-content p {
-            font-size: 0.9rem;
-            color: #555;
-        }
+        .card-content p { font-size: 0.95rem; color: #444; margin-bottom: 20px; text-align: justify; }
 
+        /* Footer */
         footer {
+            background: #1a1a1a;
+            color: #888;
+            padding: 60px 20px;
             text-align: center;
-            padding: 40px;
-            background: var(--primary);
-            color: white;
-            margin-top: 50px;
         }
 
-        /* Nav styles */
-        nav {
-            background: white;
-            padding: 15px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+        footer h2 { font-family: 'Cinzel', serif; color: var(--accent); margin-bottom: 20px; }
+        .footer-links { margin-bottom: 30px; }
+        .footer-links a { color: #ccc; text-decoration: none; margin: 0 10px; }
 
-        nav a {
-            text-decoration: none;
-            color: var(--primary);
-            font-weight: 600;
-            margin: 0 15px;
-            text-transform: uppercase;
-            font-size: 0.8rem;
+        @media (max-width: 768px) {
+            .planner-form { grid-template-columns: 1fr; }
+            .plan-btn { grid-column: span 1; }
+            header h1 { font-size: 2.8rem; }
         }
     </style>
 </head>
@@ -123,202 +236,255 @@
 
 <nav>
     <a href="#">Home</a>
+    <a href="#chronology">Timeline</a>
+    <a href="#yatra">Yatra Planner</a>
     <a href="#temples">Temples</a>
     <a href="#complexes">Complexes</a>
-    <a href="#river">River & Nature</a>
 </nav>
 
 <header>
     <h1>Hampi Heritage Yatra</h1>
-    <p>Explore the timeless ruins of the Vijayanagara Empire</p>
+    <p>Journey through the ruins where history whispers in every stone</p>
 </header>
 
+<!-- Section 1: Chronology -->
+<div id="chronology" class="chronology-wrapper">
+    <div class="container">
+        <h2 class="section-title" style="color: var(--accent);">Chronology of Hampi</h2>
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <h4>3rd Century BC</h4>
+                <p>Hampi was part of the Ashokan Empire, known for its strategic location near the river.</p>
+            </div>
+            <div class="timeline-item">
+                <h4>1336 AD</h4>
+                <p>Foundation of the Vijayanagara Empire by Harihara I and Bukka Raya I on the south bank of Tungabhadra.</p>
+            </div>
+            <div class="timeline-item">
+                <h4>1509 - 1529 AD</h4>
+                <p>The Golden Era under Krishnadevaraya. Most grand structures and international trade boomed during this time.</p>
+            </div>
+            <div class="timeline-item">
+                <h4>1565 AD</h4>
+                <p>Battle of Talikota. The empire was defeated by the Deccan Sultanates, leading to the destruction of the city.</p>
+            </div>
+            <div class="timeline-item">
+                <h4>1800 AD</h4>
+                <p>Colin Mackenzie, the first Surveyor General of India, "discovers" and starts documenting the ruins.</p>
+            </div>
+            <div class="timeline-item">
+                <h4>1986 AD</h4>
+                <p>UNESCO declares Hampi as a World Heritage Site, recognizing its architectural and historical significance.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Section 2: Yatra Planner -->
+<div id="yatra" class="container">
+    <h2 class="section-title">Plan Your Yatra</h2>
+    <div class="planner-container">
+        <div class="planner-form">
+            <div class="form-group">
+                <label>Starting City</label>
+                <select id="start-city">
+                    <option value="Bengaluru">Bengaluru</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Mumbai">Mumbai</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Duration (Days)</label>
+                <select id="duration">
+                    <option value="1">1 Day Express</option>
+                    <option value="2">2 Days Classic</option>
+                    <option value="3">3 Days Extensive</option>
+                </select>
+            </div>
+            <button class="plan-btn" onclick="generateItinerary()">Generate My Itinerary</button>
+        </div>
+        <div id="itinerary-result">
+            <h3 style="color:var(--primary); margin-bottom:10px;">Your Custom Plan:</h3>
+            <p id="plan-text"></p>
+        </div>
+    </div>
+</div>
+
+<!-- Section 3: Temples & Places -->
 <div class="container" id="temples">
+    <h2 class="section-title">The Sacred Temples</h2>
     <div class="grid">
-        
+        <!-- Virupaksha -->
         <div class="card">
-            <img src="virupaksha.jpg" alt="Virupaksha Temple">
+            <div class="card-img-wrapper">
+                <img src="virupaksha.jpg" alt="Virupaksha Temple">
+            </div>
             <div class="card-content">
                 <h3>Virupaksha Temple</h3>
-                <p>The oldest functional temple in Hampi, dedicated to Lord Shiva. Known for its towering Gopuram and intricate carvings.</p>
+                <p>Dedicated to Lord Virupaksha, a form of Shiva, this temple predates the empire itself. Its 160-foot gopuram dominates the skyline. Visitors can see the inverted shadow of the gopuram through a small hole in the wall, a marvel of ancient engineering.</p>
             </div>
         </div>
 
+        <!-- Vittala -->
         <div class="card">
-            <img src="vittala.jpg" alt="Vittala Temple">
+            <div class="card-img-wrapper">
+                <img src="vittala.jpg" alt="Vittala Temple">
+            </div>
             <div class="card-content">
                 <h3>Vittala Temple</h3>
-                <p>Famous for its Stone Chariot and musical pillars. It represents the pinnacle of Vijayanagara temple architecture.</p>
+                <p>The crown jewel of Hampi. It houses the iconic Stone Chariot, which is actually a shrine. The Ranga Mantapa is famous for its 56 musical pillars that produce melodic notes when tapped gently. This complex represents the zenith of Dravidian architecture.</p>
             </div>
         </div>
 
+        <!-- Krishna -->
         <div class="card">
-            <img src="Achyutaraya.jfif" alt="Achyutaraya Temple">
-            <div class="card-content">
-                <h3>Achyutaraya Temple</h3>
-                <p>Located between Matanga Hill and Gandhamadana, this temple features a grand courtyard and beautiful carvings.</p>
+            <div class="card-img-wrapper">
+                <img src="Krishna Temple.jpg" alt="Krishna Temple">
             </div>
-        </div>
-
-        <div class="card">
-            <img src="Hazara Rama Temple.jfif" alt="Hazara Rama Temple">
-            <div class="card-content">
-                <h3>Hazara Rama Temple</h3>
-                <p>The private temple of the Kings, adorned with thousands of carvings depicting the Ramayana.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="Krishna Temple.jpg" alt="Krishna Temple">
             <div class="card-content">
                 <h3>Krishna Temple</h3>
-                <p>Built by Krishnadevaraya to celebrate his victory over Udayagiri, known for its elegant carvings of Balakrishna.</p>
+                <p>Built by King Krishnadevaraya in 1513 to celebrate the conquest of Udayagiri. The temple is unique for its carvings of sub-deities and the Balakrishna image that was once housed here (now in a Chennai museum).</p>
             </div>
         </div>
 
+        <!-- Hazara Rama -->
         <div class="card">
-            <img src="Shree Badavilinga Gudi.jpg" alt="Shree Badavilinga Gudi">
+            <div class="card-img-wrapper">
+                <img src="Hazara Rama Temple.jfif" alt="Hazara Rama Temple">
+            </div>
             <div class="card-content">
-                <h3>Shree Badavilinga gudi</h3>
-                <p>The largest monolithic Shiva Linga in Hampi, permanently surrounded by water in its sanctum.</p>
+                <h3>Hazara Rama Temple</h3>
+                <p>Considered the private chapel of the Vijayanagara kings. The name "Hazara Rama" (Thousand Ramas) refers to the thousands of carvings on the walls depicting the story of the Ramayana in sequential panels.</p>
             </div>
         </div>
 
+        <!-- Badavi Linga -->
         <div class="card">
-            <img src="Sasivekalu Ganesha.jpg" alt="Sasivekalu Ganesha">
+            <div class="card-img-wrapper">
+                <img src="Shree Badavilinga Gudi.jpg" alt="Badavi Linga">
+            </div>
             <div class="card-content">
-                <h3>Sasivekalu Ganesha</h3>
-                <p>A giant monolithic statue of Lord Ganesha, named after the 'mustard seed' shape of the belly.</p>
+                <h3>Badavi Linga</h3>
+                <p>Commissioned by a poor peasant woman, this 3-meter high monolithic Linga stands in a chamber that is permanently flooded by a canal. It symbolizes the omnipresence of Shiva in nature.</p>
             </div>
         </div>
 
+        <!-- Ganesha Pair -->
         <div class="card">
-            <img src="Kadalekalu Ganesha.jpg" alt="Kadalekalu Ganesha">
+            <div class="card-img-wrapper">
+                <img src="Sasivekalu Ganesha.jpg" alt="Sasivekalu Ganesha">
+            </div>
             <div class="card-content">
-                <h3>Kadalekalu Ganesha</h3>
-                <p>One of the largest Ganesha statues in South India, situated on the slopes of Hemakuta Hill.</p>
+                <h3>Sasivekalu & Kadalekalu</h3>
+                <p>Two distinct monolithic Ganesha statues. Sasivekalu (Mustard Seed) is carved from a single boulder, while Kadalekalu (Gram Seed) sits in a temple with tall pillars offering a panoramic view of Hampi Bazar.</p>
             </div>
         </div>
+    </div>
 
+    <h2 class="section-title" id="complexes">The Royal Enclosure</h2>
+    <div class="grid">
+        <!-- Lotus Mahal -->
         <div class="card">
-            <img src="Pattabhirama Temple.jpg" alt="Pattabhirama Temple">
-            <div class="card-content">
-                <h3>Pattabhirama Temple</h3>
-                <p>A sprawling temple complex known for its serene atmosphere and vast pillared halls.</p>
+            <div class="card-img-wrapper">
+                <img src="Lotus Mahal.jpg" alt="Lotus Mahal">
             </div>
-        </div>
-
-        <div class="card">
-            <img src="Chandrakeshavara Temple.jpg" alt="Chandrakeshavara Temple">
-            <div class="card-content">
-                <h3>Chandrakeshavara Temple</h3>
-                <p>A beautiful temple dedicated to Lord Vishnu, showcasing the detailed artistry of the era.</p>
-            </div>
-        </div>
-
-        <div class="card" id="complexes">
-            <img src="Royal Enclosure.jpg" alt="Royal Enclosure">
-            <div class="card-content">
-                <h3>Royal Enclosure</h3>
-                <p>The seat of power, containing the remains of palaces, administrative buildings, and water systems.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="Lotus Mahal.jpg" alt="Lotus Mahal">
             <div class="card-content">
                 <h3>Lotus Mahal</h3>
-                <p>A secular building featuring Indo-Islamic architecture, shaped like a lotus bud.</p>
+                <p>A fine example of Indo-Islamic fusion architecture. It was used as a council chamber for royal women. The structure was ingeniously cooled by water pipes running through the walls, an early form of air conditioning.</p>
             </div>
         </div>
 
+        <!-- Elephant Stables -->
         <div class="card">
-            <img src="Elephant Stables.jpg" alt="Elephant Stables">
+            <div class="card-img-wrapper">
+                <img src="Elephant Stables.jpg" alt="Elephant Stables">
+            </div>
             <div class="card-content">
                 <h3>Elephant Stables</h3>
-                <p>A grand structure with 11 domed chambers used to house the royal elephants.</p>
+                <p>Consisting of 11 domed chambers, these stables housed the royal elephants. The design reflects Persian influence and the wealth of the empire which could afford such grand quarters for animals.</p>
             </div>
         </div>
 
+        <!-- Queen's Bath -->
         <div class="card">
-            <img src="Queen's Bath.jpg" alt="Queen's Bath">
+            <div class="card-img-wrapper">
+                <img src="Queen's Bath.jpg" alt="Queen's Bath">
+            </div>
             <div class="card-content">
                 <h3>Queen's Bath</h3>
-                <p>An ornate bathing chamber for the royal ladies, featuring Islamic-style arches and balconies.</p>
+                <p>A rectangular building with a plain exterior but a stunning interior. It features a sunken pool surrounded by corridors with ornate balconies and lotus-shaped fountains.</p>
             </div>
         </div>
 
+        <!-- Mahanavami Dibba -->
         <div class="card">
-            <img src="Mahanavami Dibba.jpg" alt="Mahanavami Dibba">
+            <div class="card-img-wrapper">
+                <img src="Mahanavami Dibba.jpg" alt="Mahanavami Dibba">
+            </div>
             <div class="card-content">
                 <h3>Mahanavami Dibba</h3>
-                <p>A massive stone platform used for royal ceremonies during the Navaratri festival.</p>
+                <p>A massive three-layered platform decorated with intricate carvings of elephants, horses, and dancers. It was the stage from which the King watched the grand festivals of Navaratri.</p>
             </div>
         </div>
 
+        <!-- Stepped Tank -->
         <div class="card">
-            <img src="hampi bazaar.jpg" alt="Hampi Bazar">
-            <div class="card-content">
-                <h3>Hampi Bazar</h3>
-                <p>The ancient marketplace stretching in front of the Virupaksha Temple, once a center for global trade.</p>
+            <div class="card-img-wrapper">
+                <img src="stepped tank .jpg" alt="Stepped Tank">
             </div>
-        </div>
-        
-
-        <div class="card" id="river">
-            <img src="Tungabhadra River.jpg" alt="Tungabhadra River">
             <div class="card-content">
-                <h3>Tungabhadra River</h3>
-                <p>The lifeline of Hampi, famous for its coracle boat rides and boulder-strewn landscapes.</p>
+                <h3>Stepped Tank (Pushkarani)</h3>
+                <p>Discovered during excavations in the 1980s, this tank is constructed of black schist. Each stone is marked with a number or character, suggesting it was "pre-fabricated" and assembled on-site.</p>
             </div>
         </div>
 
+        <!-- Underground Shiva -->
         <div class="card">
-            <img src="stepped tank .jpg" alt="stepped tank ">
-            <div class="card-content">
-                <h3>Stepped Tank</h3>
-                <p>An architectural marvel made of black schist, used for ritual bathing by the royals.</p>
+            <div class="card-img-wrapper">
+                <img src="Underground Shiva Temple.jfif" alt="Underground Shiva Temple">
             </div>
-        </div>
-
-        <div class="card">
-            <img src="Pushkarani.jfif" alt="Pushkarani">
-            <div class="card-content">
-                <h3>Pushkarani</h3>
-                <p>Holy water tanks attached to temples, used for festivals and religious purification.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="Ancient Aqueducts.jfif" alt="Ancient Aqueducts">
-            <div class="card-content">
-                <h3>Ancient Aqueducts</h3>
-                <p>A sophisticated water management system that supplied water to the entire city.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="Underground Shiva Temple.jfif" alt="Underground Shiva Temple">
             <div class="card-content">
                 <h3>Underground Shiva Temple</h3>
-                <p>A temple built several feet below ground level, often filled with water during the monsoon.</p>
+                <p>Built below ground level, the inner sanctum is usually submerged in water. It is one of the oldest temples in the complex and was likely used for private royal ceremonies.</p>
             </div>
         </div>
-
-        <div class="card">
-            <img src="Watch Towers.jfif" alt="Watch Towers">
-            <div class="card-content">
-                <h3>Watch Towers</h3>
-                <p>Strategically placed towers used by guards to keep watch over the royal palace grounds.</p>
-            </div>
-        </div>
-
     </div>
 </div>
 
 <footer>
-    <p>&copy; 2024 Hampi Heritage Yatra | Preserving India's Golden Past</p>
+    <h2>Hampi Heritage Yatra</h2>
+    <div class="footer-links">
+        <a href="#chronology">History</a> | 
+        <a href="#yatra">Travel Planner</a> | 
+        <a href="#temples">Sacred Sites</a> | 
+        <a href="#complexes">Royal Life</a>
+    </div>
+    <p>&copy; 2024 Hampi Heritage Yatra. All Rights Reserved. <br> Explore the footprints of a vanished empire.</p>
 </footer>
+
+<script>
+    function generateItinerary() {
+        const city = document.getElementById('start-city').value;
+        const days = document.getElementById('duration').value;
+        const resultDiv = document.getElementById('itinerary-result');
+        const planText = document.getElementById('plan-text');
+
+        let itinerary = "";
+
+        if(days == "1") {
+            itinerary = `<strong>Day 1:</strong> Arrive from ${city}. Focus on the Virupaksha Temple, Hemakuta Hill (sunset), and the Vittala Temple Stone Chariot. Quick stop at the Royal Enclosure.`;
+        } else if(days == "2") {
+            itinerary = `<strong>Day 1:</strong> Reach from ${city}. Explore Virupaksha, Hampi Bazar, and Vitthala Complex. <br><strong>Day 2:</strong> Visit the Royal Enclosure, Lotus Mahal, Elephant Stables, and the Mahanavami Dibba. Catch the sunset at Matanga Hill.`;
+        } else {
+            itinerary = `<strong>Day 1:</strong> Welcome from ${city}. Riverside walk, Tungabhadra Coracle ride, and Virupaksha Temple. <br><strong>Day 2:</strong> Detailed tour of Vittala Temple, Achyutaraya Temple, and Krishna Temple. <br><strong>Day 3:</strong> Explore Anegundi (across the river), the Hanuman Temple, and the Underground Shiva Temple before departure.`;
+        }
+
+        planText.innerHTML = itinerary;
+        resultDiv.style.display = 'block';
+        resultDiv.scrollIntoView({behavior: 'smooth'});
+    }
+</script>
 
 </body>
 </html>
