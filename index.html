@@ -22,7 +22,6 @@
             background-color: var(--bg);
             color: var(--text);
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
         header {
@@ -45,79 +44,55 @@
         }
 
         .container {
-            max-width: 1100px;
-            margin: 0 auto;
+            max-width: 1200px;
+            margin: -50px auto 50px;
             padding: 0 20px;
         }
 
-        /* VERTICAL ALTERNATING LAYOUT */
-        .temple-list {
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-bottom: 4px solid var(--accent);
             display: flex;
             flex-direction: column;
-            gap: 80px;
-            margin-top: 50px;
         }
 
-        .temple-row {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
+        .card:hover {
+            transform: translateY(-10px);
         }
 
-        .temple-row:hover {
-            transform: scale(1.02);
-        }
-
-        .temple-row:nth-child(even) {
-            flex-direction: row-reverse;
-            background: #fdfaf0;
-        }
-
-        .temple-image {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .temple-image img {
+        .card img {
             width: 100%;
-            height: 350px;
+            height: 200px;
             object-fit: cover;
-            border-radius: 12px;
-            border-bottom: 5px solid var(--accent);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            background-color: #ddd;
         }
 
-        .temple-info {
-            flex: 1.5;
+        .card-content {
+            padding: 20px;
+            flex-grow: 1;
         }
 
-        .temple-info h3 {
+        .card-content h3 {
             font-family: 'Cinzel', serif;
             color: var(--primary);
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            border-bottom: 2px solid var(--accent);
-            display: inline-block;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
         }
 
-        .temple-info p {
-            margin-bottom: 15px;
-            font-size: 1rem;
-            color: #444;
-            text-align: justify;
-        }
-
-        .highlight-box {
-            background: rgba(212, 175, 55, 0.1);
-            border-left: 4px solid var(--accent);
-            padding: 10px 15px;
-            font-style: italic;
-            font-size: 0.95rem;
+        .card-content p {
+            font-size: 0.9rem;
+            color: #555;
         }
 
         /* Nav styles */
@@ -140,23 +115,23 @@
             font-size: 0.8rem;
         }
 
-        .section-title { text-align: center; font-family: 'Cinzel', serif; font-size: 2.8rem; color: var(--primary); margin: 80px 0 40px; }
-        
-        /* Interactive features */
+        /* ADDED FEATURE STYLES */
+        .section-title { text-align: center; font-family: 'Cinzel', serif; font-size: 2.2rem; color: var(--primary); margin: 60px 0 30px; }
         .game-area { background: white; padding: 60px 0; border-top: 2px solid var(--accent); margin-top: 50px; }
-        .game-box { background: #f9f4e8; padding: 30px; border-radius: 15px; margin-bottom: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center;}
+        .game-box { background: #f9f4e8; padding: 30px; border-radius: 15px; margin-bottom: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .word-search-container { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
         .word-grid { display: grid; grid-template-columns: repeat(12, 30px); gap: 4px; }
         .grid-cell { width: 30px; height: 30px; background: white; border: 1px solid #ddd; display: flex; justify-content: center; align-items: center; font-weight: bold; cursor: pointer; border-radius: 4px; font-size: 12px; user-select: none; }
         .grid-cell.found { background: var(--success); color: white; }
         .grid-cell.selecting { background: var(--accent); color: white; }
-
+        
         .form-group { margin-bottom: 15px; text-align: left; }
         .form-group label { display: block; font-weight: 600; margin-bottom: 5px; color: var(--primary); }
         input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; background: white; }
         .btn { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; transition: 0.3s; }
         .btn:hover { background: #5d2e0d; }
 
+        /* Chatbot */
         #chat-widget { position: fixed; bottom: 20px; right: 20px; z-index: 2000; }
         #chat-btn { width: 60px; height: 60px; background: var(--primary); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; color: var(--accent); font-size: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         #chat-window { position: absolute; bottom: 70px; right: 0; width: 320px; height: 400px; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: none; flex-direction: column; overflow: hidden; }
@@ -167,17 +142,18 @@
         .bot { background: #f0f0f0; align-self: flex-start; color: #333; }
         .user { background: var(--primary); color: white; align-self: flex-end; }
 
+        /* Email Overlay */
         #email-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 9999; }
         .email-card { background: white; width: 90%; max-width: 600px; padding: 40px; border-radius: 12px; max-height: 80vh; overflow-y: auto; position: relative; }
 
-        footer { text-align: center; padding: 60px 40px; background: var(--primary); color: white; margin-top: 50px; }
-        .collab-tag { display: inline-block; padding: 5px 15px; border: 1px solid var(--accent); border-radius: 20px; margin: 5px; font-size: 0.8rem; color: var(--accent); }
-
-        @media (max-width: 768px) {
-            .temple-row, .temple-row:nth-child(even) { flex-direction: column; }
-            header h1 { font-size: 2.2rem; }
-            .temple-image { width: 100%; }
+        footer {
+            text-align: center;
+            padding: 60px 40px;
+            background: var(--primary);
+            color: white;
+            margin-top: 50px;
         }
+        .collab-tag { display: inline-block; padding: 5px 15px; border: 1px solid var(--accent); border-radius: 20px; margin: 5px; font-size: 0.8rem; color: var(--accent); }
     </style>
 </head>
 <body>
@@ -191,127 +167,188 @@
 </nav>
 
 <header>
-    <h1>Hampī Itihāsa Anusandhāna</h1>
-    <p>Journey through the sprawling ruins of the legendary Vijayanagara Empire</p>
+    <h1>Hampi Heritage Yatra</h1>
+    <p>Explore the timeless ruins of the Vijayanagara Empire</p>
 </header>
 
 <div class="container" id="temples">
-    <h2 class="section-title">The Sacred Chronicles</h2>
-    
-    <div class="temple-list">
-        
-        <!-- Temple 1 -->
-        <div class="temple-row">
-            <div class="temple-image">
-                <img src="virupaksha.jpg" alt="Virupaksha Temple" onerror="this.src='https://images.unsplash.com/photo-1590766948510-d008f3684a0c?auto=format&fit=crop&w=500'">
-            </div>
-            <div class="temple-info">
+    <div class="grid">
+        <!-- Temple Cards -->
+        <div class="card">
+            <img src="virupaksha.jpg" alt="Virupaksha Temple" onerror="this.src='https://images.unsplash.com/photo-1590766948510-d008f3684a0c?auto=format&fit=crop&w=500'">
+            <div class="card-content">
                 <h3>Virupaksha Temple</h3>
-                <p>Believed to have functioned uninterruptedly since the 7th century, this temple survived the 1565 destruction of Hampi. It is dedicated to Virupaksha, a form of Lord Shiva, and remains a vibrant center of worship today. The temple complex includes a massive 50-meter-high gopuram and a unique pinhole camera effect where the shadow of the main tower falls inverted on the wall of a small room behind the sanctum.</p>
-                <div class="highlight-box">
-                    <strong>Main Feature:</strong> Known for its <strong>inverted shadow phenomenon</strong> and its survival as the only continuously active place of worship in Hampi.
-                </div>
+                <p>The oldest functional temple in Hampi, dedicated to Lord Shiva. Known for its towering Gopuram and intricate carvings.</p>
             </div>
         </div>
 
-        <!-- Temple 2 -->
-        <div class="temple-row">
-            <div class="temple-image">
-                <img src="vittala.jpg" alt="Vittala Temple" onerror="this.src='https://images.unsplash.com/photo-1544274411-a7af6de9a96d?auto=format&fit=crop&w=500'">
-            </div>
-            <div class="temple-info">
+        <div class="card">
+            <img src="vittala.jpg" alt="Vittala Temple" onerror="this.src='https://images.unsplash.com/photo-1544274411-a7af6de9a96d?auto=format&fit=crop&w=500'">
+            <div class="card-content">
                 <h3>Vittala Temple</h3>
-                <p>This 15th-century masterpiece is the artistic soul of Hampi. It houses the world-famous Stone Chariot, which is actually a shrine for Garuda. The main hall, Maha Mandapa, is supported by 56 massive granite pillars that emit musical notes when tapped. These pillars were carved from single blocks of rock, each sounding a different note from the Indian musical scale.</p>
-                <div class="highlight-box">
-                    <strong>Main Feature:</strong> Famous for the <strong>Iconic Stone Chariot</strong> and the <strong>Musical Pillars (SaReGaMa Pillars)</strong>.
-                </div>
+                <p>Famous for its Stone Chariot and musical pillars. It represents the pinnacle of Vijayanagara temple architecture.</p>
             </div>
         </div>
 
-        <!-- Temple 3 -->
-        <div class="temple-row">
-            <div class="temple-image">
-                <img src="Achyutaraya.jfif" alt="Achyutaraya Temple" onerror="this.src='https://images.unsplash.com/photo-1623157545939-503437e6f823?auto=format&fit=crop&w=500'">
-            </div>
-            <div class="temple-info">
+        <div class="card">
+            <img src="Achyutaraya.jfif" alt="Achyutaraya Temple" onerror="this.src='https://images.unsplash.com/photo-1623157545939-503437e6f823?auto=format&fit=crop&w=500'">
+            <div class="card-content">
                 <h3>Achyutaraya Temple</h3>
-                <p>Built in 1534 AD during the reign of Achyuta Deva Raya, this temple is located in a secluded valley between Matanga Hill and Gandhamadana Hill. It is one of the few temples that feature two concentric prakaras (courtyards). The temple is dedicated to Lord Tiruvengalanatha (Vishnu). The bazaar street in front of it was once a bustling center for the trade of precious gems and silk.</p>
-                <div class="highlight-box">
-                    <strong>Main Feature:</strong> Its <strong>double-wall courtyard architecture</strong> and the highly detailed carvings on its massive pillars.
-                </div>
+                <p>Located between Matanga Hill and Gandhamadana, this temple features a grand courtyard and beautiful carvings.</p>
             </div>
         </div>
 
-        <!-- Temple 4 -->
-        <div class="temple-row">
-            <div class="temple-image">
-                <img src="Hazara Rama Temple.jfif" alt="Hazara Rama Temple" onerror="this.src='https://images.unsplash.com/photo-1600100397608-f09075706497?auto=format&fit=crop&w=500'">
-            </div>
-            <div class="temple-info">
+        <div class="card">
+            <img src="Hazara Rama.jfif" alt="Hazara Rama Temple" onerror="this.src='https://images.unsplash.com/photo-1600100397608-f09075706497?auto=format&fit=crop&w=500'">
+            <div class="card-content">
                 <h3>Hazara Rama Temple</h3>
-                <p>Functioning as the private place of worship for the Kings and the Royal family, this temple is a stone-carved narrative. The exterior walls are decorated with five horizontal rows of friezes depicting elephants, horses, soldiers, and dancers. Inside, the pillars and walls are covered in thousands (Hazara) of detailed carvings from the Ramayana epic, essentially acting as a visual storybook for the royals.</p>
-                <div class="highlight-box">
-                    <strong>Main Feature:</strong> The <strong>Bas-Relief Storytelling</strong> depicting the entire epic of <strong>Ramayana</strong> in stone.
-                </div>
+                <p>The private temple of the Kings, adorned with thousands of carvings depicting the Ramayana.</p>
             </div>
         </div>
 
-        <!-- Temple 5 -->
-        <div class="temple-row">
-            <div class="temple-image">
-                <img src="Krishna Temple.jpg" alt="Krishna Temple" onerror="this.src='https://images.unsplash.com/photo-1580193183311-8255977936a7?auto=format&fit=crop&w=500'">
-            </div>
-            <div class="temple-info">
+        <div class="card">
+            <img src="Krishna Temple.jpg" alt="Krishna Temple" onerror="this.src='https://images.unsplash.com/photo-1580193183311-8255977936a7?auto=format&fit=crop&w=500'">
+            <div class="card-content">
                 <h3>Krishna Temple</h3>
-                <p>Commissioned by Krishnadevaraya in 1513 AD to commemorate his military victory over Gajapati kings of Odisha. The temple is known for its elegant Yali (mythical creature) pillars and its sacred water tank (Pushkarani). It once housed a magnificent Balakrishna idol which is now preserved in the Chennai Museum.</p>
-                <div class="highlight-box">
-                    <strong>Main Feature:</strong> The <strong>Victory Inscriptions</strong> and its unique <strong>Sub-shrines</strong> dedicated to different incarnations of Vishnu.
-                </div>
+                <p>Built by Krishnadevaraya to celebrate his victory over Udayagiri, known for its elegant carvings of Balakrishna.</p>
             </div>
         </div>
 
-        <!-- Temple 6 -->
-        <div class="temple-row">
-            <div class="temple-image">
-                <img src="Shree Badavilinga Gudi.jpg" alt="Shree Badavilinga Gudi" onerror="this.src='https://images.unsplash.com/photo-1603565928429-5763bd03d745?auto=format&fit=crop&w=500'">
-            </div>
-            <div class="temple-info">
+        <div class="card">
+            <img src="Shree Badavilinga Gudi.jpg" alt="Shree Badavilinga Gudi" onerror="this.src='https://images.unsplash.com/photo-1603565928429-5763bd03d745?auto=format&fit=crop&w=500'">
+            <div class="card-content">
                 <h3>Badavi Linga</h3>
-                <p>Carved out of a single giant boulder, this is the largest monolithic Shiva Linga in Hampi, standing at 3 meters tall. Legend says it was commissioned by a poor (Badava) peasant woman. The base of the Linga is permanently submerged in water, as a small canal from the Tungabhadra river passes through the sanctum, symbolizing the descent of the Ganga through Shiva's hair.</p>
-                <div class="highlight-box">
-                    <strong>Main Feature:</strong> Being the <strong>largest monolithic Shiva Linga</strong> in Hampi, constantly <strong>submerged in water</strong>.
-                </div>
+                <p>The largest monolithic Shiva Linga in Hampi, permanently surrounded by water in its sanctum.</p>
             </div>
         </div>
 
-        <!-- Temple 7 -->
-        <div class="temple-row">
-            <div class="temple-image">
-                <img src="Sasivekalu Ganesha.jpg" alt="Sasivekalu Ganesha" onerror="this.src='https://images.unsplash.com/photo-1590050752117-23aae2368b19?auto=format&fit=crop&w=500'">
-            </div>
-            <div class="temple-info">
+        <div class="card">
+            <img src="Sasivekalu Ganesha.jpg" alt="Sasivekalu Ganesha" onerror="this.src='https://images.unsplash.com/photo-1590050752117-23aae2368b19?auto=format&fit=crop&w=500'">
+            <div class="card-content">
                 <h3>Sasivekalu Ganesha</h3>
-                <p>Standing on the southern slope of Hemakuta Hill, this 8-foot-tall statue is carved from a single block of rock. The belly of the Ganesha is tied with a snake, which symbolizes the legend of Ganesha tying a snake around his waist after eating too much. "Sasivekalu" means mustard seed in Kannada, referring to the rounded shape of the idol.</p>
-                <div class="highlight-box">
-                    <strong>Main Feature:</strong> The <strong>snake carved around the belly</strong> and its unique open pavilion architecture.
-                </div>
+                <p>A giant monolithic statue of Lord Ganesha, named after the 'mustard seed' shape of the belly.</p>
             </div>
         </div>
 
-        <!-- Temple 8 -->
-        <div class="temple-row">
-            <div class="temple-image">
-                <img src="Kadalekalu Ganesha.jpg" alt="Kadalekalu Ganesha" onerror="this.src='https://images.unsplash.com/photo-1590766948510-d008f3684a0c?auto=format&fit=crop&w=500'">
-            </div>
-            <div class="temple-info">
+        <div class="card">
+            <img src="Kadalekalu Ganesha.jpg" alt="Kadalekalu Ganesha" onerror="this.src='https://images.unsplash.com/photo-1590766948510-d008f3684a0c?auto=format&fit=crop&w=500'">
+            <div class="card-content">
                 <h3>Kadalekalu Ganesha</h3>
-                <p>Nearby the Sasivekalu statue, this Ganesha is much larger, standing at nearly 15 feet. It is one of the largest statues in South India. The name "Kadalekalu" translates to Bengal Gram, which the belly of the statue resembles. The temple hall is filled with slender, ornate pillars characteristic of the Vijayanagara style.</p>
-                <div class="highlight-box">
-                    <strong>Main Feature:</strong> Its <strong>extraordinary scale</strong> as one of the largest monolithic statues in India.
-                </div>
+                <p>One of the largest Ganesha statues in South India, situated on the slopes of Hemakuta Hill.</p>
             </div>
         </div>
 
+        <div class="card">
+            <img src="Pattabhirama Temple.jpg" alt="Pattabhirama Temple" onerror="this.src='https://images.unsplash.com/photo-1544274411-a7af6de9a96d?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Pattabhirama Temple</h3>
+                <p>A sprawling temple complex known for its serene atmosphere and vast pillared halls.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Chandrakeshavara Temple.jpg" alt="Chandrakeshavara Temple" onerror="this.src='https://images.unsplash.com/photo-1623157545939-503437e6f823?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Chandrakeshavara Temple</h3>
+                <p>A beautiful temple dedicated to Lord Vishnu, showcasing the detailed artistry of the era.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Royal Enclosure.jpg" alt="Royal Enclosure" onerror="this.src='https://images.unsplash.com/photo-1600100397608-f09075706497?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Royal Enclosure</h3>
+                <p>The seat of power, containing the remains of palaces, administrative buildings, and water systems.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Lotus Mahal.jpg" alt="Lotus Mahal" onerror="this.src='https://images.unsplash.com/photo-1580193183311-8255977936a7?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Lotus Mahal</h3>
+                <p>A secular building featuring Indo-Islamic architecture, shaped like a lotus bud.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Elephant Stables.jpg" alt="Elephant Stables" onerror="this.src='https://images.unsplash.com/photo-1603565928429-5763bd03d745?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Elephant Stables</h3>
+                <p>A grand structure with 11 domed chambers used to house the royal elephants.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Queen's Bath.jpg" alt="Queen's Bath" onerror="this.src='https://images.unsplash.com/photo-1590050752117-23aae2368b19?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Queen's Bath</h3>
+                <p>An ornate bathing chamber for the royal ladies, featuring Islamic-style arches and balconies.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Mahanavami Dibba.jpg" alt="Mahanavami Dibba" onerror="this.src='https://images.unsplash.com/photo-1590766948510-d008f3684a0c?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Mahanavami Dibba</h3>
+                <p>A massive stone platform used for royal ceremonies during the Navaratri festival.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Hampi Bazar.jfif" alt="Hampi Bazar" onerror="this.src='https://images.unsplash.com/photo-1544274411-a7af6de9a96d?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Hampi Bazar</h3>
+                <p>The ancient marketplace stretching in front of the Virupaksha Temple, once a center for global trade.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Tungabhadra River.jpg" alt="Tungabhadra River" onerror="this.src='https://images.unsplash.com/photo-1600100397608-f09075706497?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Tungabhadra River</h3>
+                <p>The lifeline of Hampi, famous for its coracle boat rides and boulder-strewn landscapes.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="stepped tank .jpg" alt="Stepped Tank" onerror="this.src='https://images.unsplash.com/photo-1580193183311-8255977936a7?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Stepped Tank</h3>
+                <p>An architectural marvel made of black schist, used for ritual bathing by the royals.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Pushkarani.jfif" alt="Pushkarani" onerror="this.src='https://images.unsplash.com/photo-1603565928429-5763bd03d745?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Pushkarani</h3>
+                <p>Holy water tanks attached to temples, used for festivals and religious purification.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Ancient Aqueducts.jfif" alt="Ancient Aqueducts" onerror="this.src='https://images.unsplash.com/photo-1590050752117-23aae2368b19?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Ancient Aqueducts</h3>
+                <p>A sophisticated water management system that supplied water to the entire city.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Underground Shiva Temple.jfif" alt="Underground Shiva Temple" onerror="this.src='https://images.unsplash.com/photo-1590766948510-d008f3684a0c?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Underground Shiva Temple</h3>
+                <p>A temple built several feet below ground level, often filled with water during the monsoon.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Watch Towers.jfif" alt="Watch Towers" onerror="this.src='https://images.unsplash.com/photo-1544274411-a7af6de9a96d?auto=format&fit=crop&w=500'">
+            <div class="card-content">
+                <h3>Watch Towers</h3>
+                <p>Strategically placed towers used by guards to keep watch over the royal palace grounds.</p>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -345,7 +382,7 @@
     </div>
 </section>
 
-<!-- GAMES SECTION -->
+<!-- GAMES SECTION (ONLY GAME 1 KEPT) -->
 <section id="games" class="game-area">
     <div class="container">
         <h2 class="section-title">Heritage Knowledge Game</h2>
@@ -375,7 +412,7 @@
         <div class="form-group"><label>Full Name</label><input type="text" id="c-name"></div>
         <div class="form-group"><label>Email Address</label><input type="email" id="c-email"></div>
         <div class="form-group"><label>Interests</label><textarea id="c-msg" rows="4" placeholder="Tell us what you want to learn about Hampi..."></textarea></div>
-        <button class="btn" onclick="submitContact()">Send Request & Get Guide</button>
+        <button class="btn" onclick="submitContact()">Send Request & Get PDF Guide</button>
         <p id="c-stat" style="margin-top:15px; font-size:0.85rem; text-align:center; color: var(--primary); font-weight: 600;"></p>
     </div>
 </section>
@@ -405,7 +442,7 @@
 </div>
 
 <footer>
-    <div class="container">
+    <div class="container" style="margin: 0 auto;">
         <h3>Collaborators</h3>
         <div style="margin:20px 0;">
             <span class="collab-tag">Shubham R K</span>
